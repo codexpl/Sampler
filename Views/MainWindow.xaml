@@ -9,6 +9,36 @@
         Height="450" 
         Width="800">
 
+
+
+
+    <Window.Resources>
+        <Style TargetType="MenuItem">
+            <Setter Property="FontSize"     Value="8"/>
+            <Setter Property="FontWeight"   Value="Bold"/>
+            <Setter Property="Padding"      Value="5,2"/>
+            <Setter Property="Margin"       Value="2"/>
+            <Setter Property="Background"   Value="Azure"/>
+        </Style>
+
+        <!--  resources dictionary 
+        <ResourceDictionary xmlns:v="clr-namespace:TwojaAplikacja.Views">
+
+            <DataTemplate DataType="{x:Type vm:ViewModels}">
+                <v:TabAView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:TabBViewModel}">
+                <v:TabBView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+        -->
+        
+    </Window.Resources>
+   
+    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,16 +49,16 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open" Command="{Binding OpenCommand}" />
+                <MenuItem Header="_Open"    Command="{Binding MenuFile.OpenCommand}" />
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="_Undo" Command="{Binding UndoCommand}" />
+                <MenuItem Header="_Undo"    Command="{Binding Menu.UndoCommand}" />
             </MenuItem>
             <MenuItem Header="Player">
-                <MenuItem Header="_Play" Command="{Binding PlayCommand}" />
+                <MenuItem Header="_Play"    Command="{Binding MenuPlayer.PlayCommand}" />
             </MenuItem>
-            <MenuItem Header="Efector">
-                <MenuItem Header="_Efectx" Command="{Binding EfectxCommand}" />
+            <MenuItem Header="Generator">
+                <MenuItem Header="SineWave"  Command="{Binding MenuGenerator.SineWaveCommand}" />
             </MenuItem>
         </Menu>
 
@@ -64,6 +94,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-
+        
+        
     </Grid>
 </Window>

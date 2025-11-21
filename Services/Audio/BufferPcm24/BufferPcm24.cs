@@ -11,9 +11,15 @@ namespace Sampler.Services.Audio.BufferPcm24 {
     public partial class BufferPcm24 {
 
             private   byte[]          _buffer   = new byte[0];
-            
+
+            public    int             Length    => _buffer.Length/ 3;
+
+
             public BufferPcm24( byte[] buffer )     { _buffer = buffer; }
 
 
-        }
+            public int  GetBufferLength()           { return _buffer.Length; }
+
+           
+    }
 }

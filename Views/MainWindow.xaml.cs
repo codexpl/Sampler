@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Sampler.ViewModels;
 using Sampler.Helpers;
+using Sampler.Services.Audio.BufferPcm24;
 
 namespace Sampler
 {
@@ -18,15 +19,12 @@ namespace Sampler
     /// </summary>
     public partial class MainWindow : Window
     {
-        public    MenuViewModel     menuViewModel  { get; private set; }
-        public    LogService        logService  {get; private set; }
+
 
         public MainWindow()
         {
             InitializeComponent();
-            logService = new LogService( LogBox );
-            DataContext = new MenuViewModel ( logService );
-
+            DataContext = new ViewModel ( LogBox );
         }
 
 
