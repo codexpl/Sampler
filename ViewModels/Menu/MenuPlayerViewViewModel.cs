@@ -26,7 +26,7 @@ namespace Sampler.ViewModels.Menu {
             }
 
             private void Play() {
-                _viewModel.LogService.Append( $"[INFO] Play command executed. buffer size {_viewModel.Buffer.GetBufferLength()} bytes" );
+                _viewModel.LogService.Append( $"[INFO] Play command executed. buffer size {_viewModel.Buffer.Bytes.Length} bytes" );
                 _viewModel.Buffer.Play();
             }
     }

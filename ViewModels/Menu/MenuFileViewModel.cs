@@ -56,7 +56,7 @@ namespace Sampler.ViewModels.Menu {
                     _viewModel.WaveSmpl = new WaveSample( File.ReadAllBytes( filePath ) );
                     _viewModel.Buffer = new BufferPcm24( _viewModel.WaveSmpl.GetAudioData() );
                 }
-                _viewModel.LogService.Append( "[INFO] Opened file.  buffer bytes lenth = " + _viewModel.Buffer.GetBufferLength() );
+                _viewModel.LogService.Append( "[INFO] Opened file.  buffer bytes lenth = " + _viewModel.Buffer.Bytes.Length );
             }
 
 
