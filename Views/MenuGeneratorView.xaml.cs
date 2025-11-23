@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,23 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Sampler.ViewModels;
-using Sampler.Helpers;
-using Sampler.Services.Audio.BufferPcm24;
-using Sampler.Services.AppConfiguration;
 
-namespace Sampler
+namespace Sampler.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy MenuGeneratorView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuGeneratorView : UserControl
     {
-
-        public MainWindow()
+        public MenuGeneratorView()
         {
             InitializeComponent();
-            DataContext = new ViewModel ( LogBox );
         }
     }
 }

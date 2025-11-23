@@ -1,20 +1,48 @@
 ﻿using Sampler.Helpers;
+using Sampler.Helpers.WaveSample;
+using Sampler.Services.AppConfiguration;
 using Sampler.Services.Audio.BufferPcm24;
 using Sampler.ViewModels.Menu;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Sampler.ViewModels {
-    public  class ViewModel {
+    public  class ViewModel:INotifyPropertyChanged {
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+
+
+
+
+        public ICommand ShowFileCommand         { get; }
+        public ICommand ShowPlayerCommand       { get; }
+        public ICommand ShowGeneratorCommand    { get; }
+
 
         public      LogService              LogService         { get; private set; }
-        public      BufferPcm24             Buffer             { get; set; }
         public      WaveSample              WaveSmpl           { get; set; } = new WaveSample();
+
+
+        private     object                  _currentMenu;    
+        public object CurrentMenu {
+            get => _currentMenu;
+            set
+            {
+                _currentMenu = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentMenu)));
+                LogService.Append("[WARNING] OnPropertyChanged ");
+            }   
+        }
+
 
         public      MenuFileViewModel       MenuFile           { get; set; }
         public      MenuPlayerViewViewModel MenuPlayer         { get; set; }
@@ -22,11 +50,17 @@ namespace Sampler.ViewModels {
 
 
         public ViewModel( RichTextBox richTextBox ) {
-            this.Buffer             = new BufferPcm24(Array.Empty<byte>());
             this.LogService         = new LogService( richTextBox );
             this.MenuFile           = new MenuFileViewModel( (ViewModel) this );
             this.MenuPlayer         = new MenuPlayerViewViewModel( (ViewModel) this );
             this.MenuGenerator      = new MenuGeneratorViewModel( (ViewModel) this );
+
+            this.CurrentMenu        = this.MenuFile;
+            ShowFileCommand         = new RelayCommand( ()  => CurrentMenu = this.MenuFile );
+            ShowPlayerCommand       = new RelayCommand ( () => CurrentMenu = this.MenuPlayer );
+            ShowGeneratorCommand    = new RelayCommand( ()  => CurrentMenu = this.MenuGenerator);
+
+
             LogService.Append( "[INFO] ViewModel initialized." );
         }
     }

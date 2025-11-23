@@ -17,17 +17,17 @@ namespace Sampler.ViewModels.Menu {
             public event PropertyChangedEventHandler? PropertyChanged;
             protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); 
 
-            public      ViewModel                              _viewModel       { get; set; }
-            public      ICommand                                PlayCommand     { get; set; }
+            public      ViewModel                              VModel           { get; set; }
+            public      ICommand                               PlayCommand      { get; set; }
 
             public MenuPlayerViewViewModel( ViewModel viewModel ) {
-                _viewModel           = viewModel;
+                VModel           = viewModel;
                 PlayCommand        = new RelayCommand(Play);
             }
 
             private void Play() {
-                _viewModel.LogService.Append( $"[INFO] Play command executed. buffer size {_viewModel.Buffer.Bytes.Length} bytes" );
-                _viewModel.Buffer.Play();
+                VModel.LogService.Append( $"[INFO] Play command executed. buffer size {VModel.WaveSmpl.AudioData.Bytes.Length} bytes" );
+                VModel.WaveSmpl.AudioData.Play();
             }
     }
 }

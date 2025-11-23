@@ -46,6 +46,26 @@ namespace Sampler.Services.Audio.BufferPcm24 {
             }
 
 
+            public void SineTest(int sampleCount, double frequency)
+            {
+                int sampleRate = _waveFormat.SampleRate;
+                int totalBytes = sampleCount * 3 * 2; // 3 bajty na próbkę, 2 kanały
+                _buffer = new byte[totalBytes];
+
+                double amplitude = 8388607; // max dla 24-bit signed
+                double twoPiF = 2 * Math.PI * frequency;
+
+                for (int i = 0; i < sampleCount; i++)
+                {
+                    double t = (double)i / sampleRate;
+                    int leftValue  = (int)(Math.Sin(twoPiF * t) * amplitude);   // Lewy kanał
+                    int rightValue = (int)(-Math.Sin(twoPiF * t) * amplitude);  // Prawy kanał (anty-faza)
+
+                    int offset = i * 6;
+                    Write24Bit(offset, leftValue);       // Left
+                    Write24Bit(offset + 3, rightValue);  // Right
+                }
+            }
 
             public void CreateSineWave(int samples, double frequency)
             {

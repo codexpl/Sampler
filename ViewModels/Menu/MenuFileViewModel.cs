@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Sampler.Services.Audio;
 using Sampler.Services.Audio.BufferPcm24;
+using Sampler.Helpers.WaveSample;
+using Sampler.Services.AppConfiguration;
 
 
 
@@ -28,22 +30,21 @@ using Sampler.Services.Audio.BufferPcm24;
 namespace Sampler.ViewModels.Menu {
  public class MenuFileViewModel:INotifyPropertyChanged {
 
-            public event PropertyChangedEventHandler? PropertyChanged;
-            protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); 
+                    public event PropertyChangedEventHandler? PropertyChanged;
+                    protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); 
 
 
-
-
-                    public      ViewModel           _viewModel      { get; set; }
-
+                    public      ViewModel           VModel          { get; set; }
                     public      ICommand            OpenCommand     { get; set; }
-                     
-    
+                    public      ICommand            SaveCommand     { get; set; }
+
+
 
             public MenuFileViewModel( ViewModel viewModel ) {          
-                    _viewModel     = viewModel;
-                    OpenCommand    = new RelayCommand(Open);                
-                    _viewModel.LogService.Append( "[INFO] MenuViewModel initialized." ); 
+                    VModel     = viewModel;
+                    OpenCommand    = new RelayCommand(Open);       
+                    SaveCommand    = new RelayCommand(Save);
+                    VModel.LogService.Append( "[INFO] MenuViewModel initialized." );               
             }
 
 
@@ -51,15 +52,25 @@ namespace Sampler.ViewModels.Menu {
 
             private void Open() {
                 var openFileDialog = new Microsoft.Win32.OpenFileDialog {   Filter = "WAV Files (*.wav)|*.wav|All Files (*.*)|*.*"  };
+                if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                    _viewModel.WaveSmpl = new WaveSample( File.ReadAllBytes( filePath ) );
-                    _viewModel.Buffer = new BufferPcm24( _viewModel.WaveSmpl.GetAudioData() );
+                    VModel.WaveSmpl = new WaveSample( (byte[]) File.ReadAllBytes( filePath ) );
+                }           
+                VModel.LogService.Append( "[INFO] Opened file. AudioData.Bytes.Length = " + VModel.WaveSmpl.AudioData.Bytes.Length );
+            }
+
+            private void Save() {
+                var saveFileDialog = new Microsoft.Win32.SaveFileDialog {   Filter = "WAV Files (*.wav)|*.wav|All Files (*.*)|*.*"  };
+                if( Directory.Exists( AppConfiguration.getWriteDirectory() ) ) saveFileDialog.InitialDirectory = AppConfiguration.getWriteDirectory();
+                if (saveFileDialog.ShowDialog() == true) {
+                    var filePath = saveFileDialog.FileName;
+                    File.WriteAllBytes( filePath, VModel.WaveSmpl.ToWaveFile24() );
                 }
-                _viewModel.LogService.Append( "[INFO] Opened file.  buffer bytes lenth = " + _viewModel.Buffer.Bytes.Length );
+                VModel.LogService.Append( "[INFO] Saved file." );
             }
 
 
-    }
+        }
 }
 

@@ -17,18 +17,36 @@ namespace Sampler.ViewModels.Menu {
             public event PropertyChangedEventHandler? PropertyChanged;
             protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-            public      ViewModel       _viewModel       { get; set; }
-            public      ICommand        SineWaveCommand   { get; set; }
+            public      ViewModel       VModel              { get; set; }
+            public      ICommand        GenerateCommand     { get; set; }
+
+            private int _frequency;
+            public int Frequency
+            {
+                get => _frequency;
+                set { _frequency = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Frequency))); }
+            }
+
+            private int _duration;
+            public int Duration
+            {
+                get => _duration;
+                set { _duration = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Duration))); }
+            }
+
+
 
             public MenuGeneratorViewModel( ViewModel viewModel ) {
-                _viewModel           = viewModel;
-                SineWaveCommand      = new RelayCommand(GenerateSineWave);
+                VModel                  = viewModel;
+                GenerateCommand         = new RelayCommand(GenerateSineWave);
+                Frequency               =   400;
+                Duration                =   44100;
             }
 
 
             private void GenerateSineWave() {
-                _viewModel.LogService.Append( "[INFO] Generating Sine Wave..." );
-                _viewModel.Buffer.CreateSineWave( 44100, 440.0 ); // 1 second of A4
+                VModel.LogService.Append( "[INFO] Generating Sine Wave..." );
+                VModel.WaveSmpl.AudioData.SineTest( Duration, Frequency ); // 1 second of A4
             }
 
     }
