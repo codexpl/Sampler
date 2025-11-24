@@ -43,8 +43,7 @@ namespace Sampler.ViewModels.Menu {
             public MenuFileViewModel( ViewModel viewModel ) {          
                     VModel     = viewModel;
                     OpenCommand    = new RelayCommand(Open);       
-                    SaveCommand    = new RelayCommand(Save);
-                    VModel.LogService.Append( "[INFO] MenuViewModel initialized." );               
+                    SaveCommand    = new RelayCommand(Save);             
             }
 
 

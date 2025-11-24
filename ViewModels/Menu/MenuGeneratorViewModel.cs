@@ -37,8 +37,8 @@ namespace Sampler.ViewModels.Menu {
 
 
             public MenuGeneratorViewModel( ViewModel viewModel ) {
-                VModel                  = viewModel;
-                GenerateCommand         = new RelayCommand(GenerateSineWave);
+                VModel                  =   viewModel;
+                GenerateCommand         =   new RelayCommand(GenerateSineWave);
                 Frequency               =   400;
                 Duration                =   44100;
             }

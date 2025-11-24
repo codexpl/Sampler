@@ -39,7 +39,6 @@ namespace Sampler.ViewModels {
             {
                 _currentMenu = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentMenu)));
-                LogService.Append("[WARNING] OnPropertyChanged ");
             }   
         }
 
@@ -56,12 +55,9 @@ namespace Sampler.ViewModels {
             this.MenuGenerator      = new MenuGeneratorViewModel( (ViewModel) this );
 
             this.CurrentMenu        = this.MenuFile;
-            ShowFileCommand         = new RelayCommand( ()  => CurrentMenu = this.MenuFile );
-            ShowPlayerCommand       = new RelayCommand ( () => CurrentMenu = this.MenuPlayer );
-            ShowGeneratorCommand    = new RelayCommand( ()  => CurrentMenu = this.MenuGenerator);
-
-
-            LogService.Append( "[INFO] ViewModel initialized." );
+            ShowFileCommand         = new RelayCommand  ( ()    => CurrentMenu = this.MenuFile );
+            ShowPlayerCommand       = new RelayCommand  ( ()    => CurrentMenu = this.MenuPlayer );
+            ShowGeneratorCommand    = new RelayCommand  ( ()    => CurrentMenu = this.MenuGenerator );
         }
     }
 }

@@ -3,10 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Width="500"
              Height="300">
-    <StackPanel>
-        <TextBlock Text="Generator" FontWeight="Bold" />
-        <TextBox Width="100" Text="{Binding Frequency}" />
-        <TextBox Width="100" Text="{Binding Duration}" />
-        <Button Content="Generate" Command="{Binding GenerateCommand}" />
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- nagłówek -->
+            <RowDefinition Height="Auto"/>
+            <!-- pola -->
+            <RowDefinition Height="Auto"/>
+            <!-- przycisk -->
+            <RowDefinition Height="*"/>
+            <!-- puste miejsce -->
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Generator" FontWeight="Bold" />
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5">
+            <TextBox Width="100" Text="{Binding Frequency}" Margin="5,0"/>
+            <TextBox Width="100" Text="{Binding Duration}" Margin="5,0"/>
+        </StackPanel>
+
+        <Button Grid.Row="2" Content="Generate" Command="{Binding GenerateCommand}" Margin="5"/>
+    </Grid>
 </UserControl>
+

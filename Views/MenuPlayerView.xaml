@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Content="Play" HorizontalAlignment="Left" Margin="54,74,0,0" VerticalAlignment="Top" Width="86"/>
+        <Button Content="Play" HorizontalAlignment="Left" Margin="54,74,0,0" VerticalAlignment="Top" Width="86" Command="{Binding PlayCommand}"/>
         <Button Content="Pause" HorizontalAlignment="Left" Margin="204,74,0,0" VerticalAlignment="Top" Width="86"/>
         <Button Content="Stop" HorizontalAlignment="Left" Margin="338,74,0,0" VerticalAlignment="Top" Width="86"/>
     </Grid>

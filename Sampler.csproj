@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>wifi-icon-3788.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wifi-icon-3788.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icons\AtAndT.ico" />
