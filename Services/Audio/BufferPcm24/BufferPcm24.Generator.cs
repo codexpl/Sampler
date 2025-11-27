@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sampler.Services.Audio.BufferPcm24 {
+namespace Sampler.Services.Audio {
     public partial class BufferPcm24 {
 
 
@@ -45,7 +45,6 @@ namespace Sampler.Services.Audio.BufferPcm24 {
                 }
             }
 
-
             public void SineTest(int sampleCount, double frequency)
             {
                 int sampleRate = _waveFormat.SampleRate;
@@ -85,31 +84,6 @@ namespace Sampler.Services.Audio.BufferPcm24 {
                         Write24Bit(offset + 3, sampleValue);   // Right
                     }
             }
-
-
-
-            public void CreateSineWaveWithPhase(int samples, double frequency, double phaseRadians)
-            {
-                int sampleRate = _waveFormat.SampleRate;
-                int totalBytes = samples * 3 * 2; // 3 bytes per sample, 2 channels
-                _buffer = new byte[totalBytes];
-
-                double amplitude = 8388607; // max for 24-bit signed
-                double twoPiF = 2 * Math.PI * frequency;
-
-                for (int i = 0; i < samples; i++)
-                {
-                    double t = (double)i / sampleRate;
-                    double angle = twoPiF * t + phaseRadians;
-                    int sampleValue = (int)(Math.Sin(angle) * amplitude);
-
-                    int offset = i * 6;
-                    Write24Bit(offset, sampleValue);       // Left
-                    Write24Bit(offset + 3, sampleValue);   // Right
-                }
-            }
-
-
 
             public void CreatePulseTrain(int samples, int interval)  {
                 int totalBytes = samples * 3 * 2; // 3 bytes per sample, 2 channels

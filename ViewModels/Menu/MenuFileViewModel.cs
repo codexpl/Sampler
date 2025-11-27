@@ -20,8 +20,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Sampler.Services.Audio;
-using Sampler.Services.Audio.BufferPcm24;
-using Sampler.Helpers.WaveSample;
 using Sampler.Services.AppConfiguration;
 
 
@@ -54,7 +52,7 @@ namespace Sampler.ViewModels.Menu {
                 if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                    VModel.WaveSmpl = new WaveSample( (byte[]) File.ReadAllBytes( filePath ) );
+                    VModel.WaveSmpl = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
                 }           
                 VModel.LogService.Append( "[INFO] Opened file. AudioData.Bytes.Length = " + VModel.WaveSmpl.AudioData.Bytes.Length );
             }

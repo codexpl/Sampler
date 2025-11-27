@@ -10,7 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Sampler.ViewModels;
 using Sampler.Helpers;
-using Sampler.Services.Audio.BufferPcm24;
+using Sampler.Services.Audio;
 using Sampler.Services.AppConfiguration;
 
 namespace Sampler

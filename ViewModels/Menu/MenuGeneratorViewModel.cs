@@ -9,7 +9,6 @@ using System.Windows.Input;
 using Sampler.Helpers;
 using Sampler.Models;
 using Sampler.Services.Audio;
-using Sampler.Services.Audio.BufferPcm24;
 
 namespace Sampler.ViewModels.Menu {
     public  class MenuGeneratorViewModel:INotifyPropertyChanged {
@@ -46,7 +45,7 @@ namespace Sampler.ViewModels.Menu {
 
             private void GenerateSineWave() {
                 VModel.LogService.Append( "[INFO] Generating Sine Wave..." );
-                VModel.WaveSmpl.AudioData.SineTest( Duration, Frequency ); // 1 second of A4
+                VModel.WaveSmpl.AudioData.CreateSineWave( Duration, Frequency ); // 1 second of A4
             }
 
     }

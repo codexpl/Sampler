@@ -7,7 +7,7 @@ using CSCore;
 using CSCore.Codecs.WAV;
 using CSCore.SoundOut;
 
-namespace Sampler.Services.Audio.BufferPcm24 {
+namespace Sampler.Services.Audio {
     public partial class BufferPcm24 {
 
             private   byte[]          _buffer   = new byte[0];

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sampler.Helpers.WaveSample {
+namespace Sampler.Services.Audio {
     public class WaveHeader  {
   
             public int      FileSize            { get; set; }

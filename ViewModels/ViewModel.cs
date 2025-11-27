@@ -1,7 +1,6 @@
 ﻿using Sampler.Helpers;
-using Sampler.Helpers.WaveSample;
 using Sampler.Services.AppConfiguration;
-using Sampler.Services.Audio.BufferPcm24;
+using Sampler.Services.Audio;
 using Sampler.ViewModels.Menu;
 
 using System;
@@ -29,7 +28,7 @@ namespace Sampler.ViewModels {
 
 
         public      LogService              LogService         { get; private set; }
-        public      WaveSample              WaveSmpl           { get; set; } = new WaveSample();
+        public      WaveSampler              WaveSmpl           { get; set; } = new WaveSampler();
 
 
         private     object                  _currentMenu;    

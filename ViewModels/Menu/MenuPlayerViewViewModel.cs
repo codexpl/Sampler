@@ -9,7 +9,6 @@ using System.Windows.Input;
 using Sampler.Helpers;
 using Sampler.Models;
 using Sampler.Services.Audio;
-using Sampler.Services.Audio.BufferPcm24;
 
 namespace Sampler.ViewModels.Menu {
     public  class MenuPlayerViewViewModel:INotifyPropertyChanged {

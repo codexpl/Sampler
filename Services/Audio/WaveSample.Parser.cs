@@ -1,4 +1,5 @@
-﻿using Sampler.Services.Audio.BufferPcm24;
+using Sampler.Services.Audio;
+
 
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sampler.Helpers.WaveSample {
-    public partial class WaveSample {
+namespace Sampler.Services.Audio {
+
+    public partial class WaveSampler {
 
 
                 public void LoadFromBytes(byte[] data) {

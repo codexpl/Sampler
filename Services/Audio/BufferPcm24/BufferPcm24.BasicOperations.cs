@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sampler.Services.Audio.BufferPcm24 {
+namespace Sampler.Services.Audio {
     public partial class BufferPcm24 {
 
 

@@ -1,4 +1,5 @@
-﻿using Sampler.Services.Audio.BufferPcm24;
+using Sampler.Services.Audio;
+using Sampler.Services.Audio.WaveSample.Editor;
 
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sampler.Helpers.WaveSample {
+namespace Sampler.Services.Audio {
 
 
 
-    public partial class WaveSample {
+    public partial class WaveSampler {
 
         #region DIAGNOSTYCZNE ___ 
             private             byte[] _oryginalData    =   Array.Empty<byte>();
@@ -27,13 +28,14 @@ namespace Sampler.Helpers.WaveSample {
 
             public      WaveHeader          Header          =  new WaveHeader();
             public      BufferPcm24         AudioData       =  null!;
+            public      Editor              Editor          =  null!;
 
 
 
         /// <summary>   
         ///     Constructor pustego obiektu.
         /// </summary>
-        public WaveSample() {
+        public WaveSampler() {
                     _status                =   ObjectStatus.UNKNOWN;
                     _oryginalData          =   Array.Empty<byte>();
         }
@@ -41,10 +43,10 @@ namespace Sampler.Helpers.WaveSample {
 
 
         /// <summary>
-        ///     Constructor klasy WaveSample, przyjmuje tablicę bajtów z odczytanego pliku wav. 
+        ///     Constructor klasy WaveSampler, przyjmuje tablicę bajtów z odczytanego pliku wav. 
         /// </summary>
         /// <param name="data"> odczytany plik wav </param>
-        public WaveSample(byte[] data) {    
+        public WaveSampler(byte[] data) {    
                     if ( data.Length < 44 || Encoding.ASCII.GetString( data, 0, 4) != "RIFF") {
                         _status = ObjectStatus.ERROR;
                         _statusMessage =    GetType().Name  + "\n nieprawidłowe dane wejsciowe. spodziewano danych pliku WAV";
@@ -52,6 +54,7 @@ namespace Sampler.Helpers.WaveSample {
                     }
                     _oryginalData = (byte[]) data.Clone();
                     LoadFromBytes( _oryginalData );
+                    this.Editor =   new Editor( Header, AudioData );
                     if ( Header.Subchunk2IDsize + 44 != _oryginalData.Length ) {
                         _status = ObjectStatus.WARNING;
                         _statusMessage =    GetType().Name  + 
