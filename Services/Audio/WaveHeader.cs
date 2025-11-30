@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Sampler.Services.Audio {
     public class WaveHeader  {
   
-            public int      FileSize            { get; set; }
+            public int      ChunkSize           { get; set; }
             public string   Format              { get; set; }   =   string.Empty;
             public string   Subchunk1ID         { get; set; }   =   string.Empty;
             public uint     Subchunk1Size       { get; set; }
@@ -18,7 +18,7 @@ namespace Sampler.Services.Audio {
             public ushort   BlockAlign          { get; set; }
             public short    BitsPerSample       { get; set; }
             public string   Subchunk2ID         { get; set; }   =   string.Empty;
-            public int      Subchunk2IDsize     { get; set; }
+            public int      Subchunk2Size       { get; set; }
         
 
 
@@ -30,7 +30,7 @@ namespace Sampler.Services.Audio {
                 {
                     string sFormatAudio     =   _getWavFormatDescription(FormatAudio);
 
-                    return $"Rozmiar pliku: . . . . . . . . {FileSize}      bajtów\n" +
+                    return $"Rozmiar pliku: . . . . . . . . {ChunkSize}      bajtów\n" +
                            $"Format:. . . . . . . . . . . . {Format}\n" +
                            $"Subchunk1ID: . . . . . . . . . {Subchunk1ID}\n" +
                            $"Subchunk1Size: . . . . . . . . {Subchunk1Size}\n" + 
@@ -41,7 +41,7 @@ namespace Sampler.Services.Audio {
                            $"Blok wyrównania: . . . . . . . {BlockAlign} bajtów\n" +
                            $"Rozdzielczość: . . . . . . . . {BitsPerSample} bitów\n" +
                            $"Subchunk2ID ( Data label ):. . {Subchunk2ID}\n" +
-                           $"Rozmiar danych audio:. . . . . {Subchunk2IDsize} bajtów";
+                           $"Rozmiar danych audio:. . . . . {Subchunk2Size} bajtów";
                 }
 
 

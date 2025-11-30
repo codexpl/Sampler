@@ -27,7 +27,7 @@ namespace Sampler.ViewModels {
         public ICommand ShowGeneratorCommand    { get; }
 
 
-        public      LogService              LogService         { get; private set; }
+        public      LogService               LogService         { get; private set; }
         public      WaveSampler              WaveSmpl           { get; set; } = new WaveSampler();
 
 

@@ -1,6 +1,4 @@
 using Sampler.Services.Audio;
-using Sampler.Services.Audio.WaveSample.Editor;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,10 +53,10 @@ namespace Sampler.Services.Audio {
                     _oryginalData = (byte[]) data.Clone();
                     LoadFromBytes( _oryginalData );
                     this.Editor =   new Editor( Header, AudioData );
-                    if ( Header.Subchunk2IDsize + 44 != _oryginalData.Length ) {
+                    if ( Header.Subchunk2Size + 44 != _oryginalData.Length ) {
                         _status = ObjectStatus.WARNING;
                         _statusMessage =    GetType().Name  + 
-                                    "\n nieprawidłowe dane wejsciowe. rozmiar danych audio nie zgadza się z wartością pola Subchunk2IDsize";
+                                    "\n nieprawidłowe dane wejsciowe. rozmiar danych audio nie zgadza się z wartością pola Subchunk2Size";
                         return;
                     }
         }

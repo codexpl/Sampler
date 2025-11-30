@@ -59,7 +59,7 @@ namespace Sampler.Services.Audio {
                     if(data == null || data.Length < 12)
                         throw new ArgumentException("Dane WAV są zbyt krótkie lub puste.");
 
-                    Header.FileSize    = BitConverter.ToInt32(data, 4) + 8;
+                    Header.ChunkSize    = BitConverter.ToInt32(data, 4) + 8;
                     Header.Format      = Encoding.ASCII.GetString(data, 8, 4);
 
                     int offset = 12; // początek chunków po "RIFF" i "WAVE"
@@ -79,7 +79,7 @@ namespace Sampler.Services.Audio {
                             Header.BitsPerSample   = BitConverter.ToInt16(data, offset + 22);
                         } else if(chunkId == "data") {
                             Header.Subchunk2ID = chunkId;
-                            Header.Subchunk2IDsize = chunkSize;
+                            Header.Subchunk2Size = chunkSize;
                             // dane audio można przekazać dalej, np. do innej klasy
                             break;
                         }
@@ -98,15 +98,15 @@ namespace Sampler.Services.Audio {
                 {
                     // Aktualizacja rozmiarów
                     Header.Subchunk1Size = 16; // PCM
-                    Header.Subchunk2IDsize = AudioData.Bytes.Length;
-                    Header.FileSize = 36 + Header.Subchunk2IDsize;
+                    Header.Subchunk2Size = AudioData.Bytes.Length;
+                    Header.ChunkSize = 36 + Header.Subchunk2Size;
 
                     using (var ms = new MemoryStream())
                     using (var bw = new BinaryWriter(ms))
                     {
-                        // RIFF header
+                        // RIFF Header
                         bw.Write(Encoding.ASCII.GetBytes("RIFF"));
-                        bw.Write(Header.FileSize);
+                        bw.Write(Header.ChunkSize);
                         bw.Write(Encoding.ASCII.GetBytes("WAVE"));
 
                         // fmt subchunk
@@ -121,7 +121,7 @@ namespace Sampler.Services.Audio {
 
                         // data subchunk
                         bw.Write(Encoding.ASCII.GetBytes("data"));
-                        bw.Write(Header.Subchunk2IDsize);
+                        bw.Write(Header.Subchunk2Size);
                         bw.Write(AudioData.Bytes);
                         return ms.ToArray();
                     }
