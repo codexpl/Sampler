@@ -15,7 +15,7 @@ namespace Sampler.Services.Audio {
 
 
 
-            public void Clear()          { _buffer = new byte[0]; }
+            public void Clear()      =>     _buffer = new byte[0]; 
             public BufferPcm24( byte[] buffer )     { _buffer = buffer; }
 
     }

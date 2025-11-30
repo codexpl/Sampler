@@ -25,7 +25,7 @@ namespace Sampler.Services.Audio {
 
 
             public      WaveHeader          Header          =  new WaveHeader();
-            public      BufferPcm24         AudioData       =  null!;
+            public      BufferPcm24         Buffer          =  null!;               // ToDo   na tym buforze ni
             public      Editor              Editor          =  null!;
 
 
@@ -52,7 +52,7 @@ namespace Sampler.Services.Audio {
                     }
                     _oryginalData = (byte[]) data.Clone();
                     LoadFromBytes( _oryginalData );
-                    this.Editor =   new Editor( Header, AudioData );
+                    this.Editor =   new Editor( this );
                     if ( Header.Subchunk2Size + 44 != _oryginalData.Length ) {
                         _status = ObjectStatus.WARNING;
                         _statusMessage =    GetType().Name  + 

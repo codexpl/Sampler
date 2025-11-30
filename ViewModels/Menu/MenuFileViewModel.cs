@@ -54,7 +54,7 @@ namespace Sampler.ViewModels.Menu {
                     var filePath = openFileDialog.FileName;
                     VModel.WaveSmpl = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
                 }           
-                VModel.LogService.Append( "[INFO] Opened file. AudioData.Bytes.Length = " + VModel.WaveSmpl.AudioData.Bytes.Length );
+                VModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + VModel.WaveSmpl.Buffer.Bytes.Length );
             }
 
             private void Save() {

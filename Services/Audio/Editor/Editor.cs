@@ -17,28 +17,17 @@ namespace Sampler.Services.Audio {
 
 
 
-            public WaveHeader       Header      { get; set; }
-            public BufferPcm24      Buffer      { get; set; }
+            private readonly WaveSampler        _sampler;
 
 
 
 
-            public Editor( WaveHeader waveHeader, BufferPcm24 buffer) {
-                this.Header = waveHeader;
-                this.Buffer = buffer;
-
-                this._sizeOfSample = Header.BitsPerSample / 8;
+            public Editor( WaveSampler sampler ) {
+                
+                this._sampler       =   sampler;
+                this._sizeOfSample  =   _sampler.Header.BitsPerSample / 8;
                 IsSuccess = true;
             }
-
-
-
-
-
-
-
-
-
 
             
     }

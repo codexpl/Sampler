@@ -13,8 +13,9 @@ namespace Sampler.Services.Audio {
     public partial class WaveSampler {
 
 
-                public void LoadFromBytes(byte[] data) {
+                public void         LoadFromBytes(byte[] data) {
                     byte[]    bytesAudio;
+                  
                     _status = ObjectStatus.UNKNOWN;
                     _statusMessage = string.Empty;
 
@@ -37,7 +38,7 @@ namespace Sampler.Services.Audio {
                             if(chunkId == "data") {
                                 bytesAudio = new byte[chunkSize];
                                 Array.Copy(data, offset + 8, bytesAudio, 0, chunkSize);
-                                AudioData = new BufferPcm24(bytesAudio);                       // ---------- BUFFERPCM24 INITIALIZE ---------------
+                                Buffer = new BufferPcm24(bytesAudio);                       // ---------- BUFFERPCM24 INITIALIZE ---------------
                                 _status = ObjectStatus.SUCCESS;
                                 _statusMessage = "Plik WAV został poprawnie załadowany.";
                                 return;
@@ -55,7 +56,7 @@ namespace Sampler.Services.Audio {
 
 
 
-                public void ParseFromBytes(byte[] data) {
+                public void         ParseFromBytes(byte[] data) {
                     if(data == null || data.Length < 12)
                         throw new ArgumentException("Dane WAV są zbyt krótkie lub puste.");
 
@@ -98,7 +99,7 @@ namespace Sampler.Services.Audio {
                 {
                     // Aktualizacja rozmiarów
                     Header.Subchunk1Size = 16; // PCM
-                    Header.Subchunk2Size = AudioData.Bytes.Length;
+                    Header.Subchunk2Size = Buffer.Bytes.Length;
                     Header.ChunkSize = 36 + Header.Subchunk2Size;
 
                     using (var ms = new MemoryStream())
@@ -122,7 +123,7 @@ namespace Sampler.Services.Audio {
                         // data subchunk
                         bw.Write(Encoding.ASCII.GetBytes("data"));
                         bw.Write(Header.Subchunk2Size);
-                        bw.Write(AudioData.Bytes);
+                        bw.Write(Buffer.Bytes);
                         return ms.ToArray();
                     }
                 }

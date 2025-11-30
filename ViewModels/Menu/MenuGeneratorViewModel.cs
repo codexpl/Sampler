@@ -45,7 +45,7 @@ namespace Sampler.ViewModels.Menu {
 
             private void GenerateSineWave() {
                 VModel.LogService.Append( "[INFO] Generating Sine Wave..." );
-                VModel.WaveSmpl.AudioData.CreateSineWave( Duration, Frequency ); // 1 second of A4
+                VModel.WaveSmpl.Editor.ApplyGain(0.5f);
             }
 
     }

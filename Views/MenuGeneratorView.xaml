@@ -1,28 +1,28 @@
 ﻿<UserControl x:Class="Sampler.Views.MenuGeneratorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Width="500"
-             Height="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- nagłówek -->
-            <RowDefinition Height="Auto"/>
-            <!-- pola -->
-            <RowDefinition Height="Auto"/>
-            <!-- przycisk -->
-            <RowDefinition Height="*"/>
-            <!-- puste miejsce -->
-        </Grid.RowDefinitions>
+             xmlns:vm="clr-namespace:Sampler.ViewModels">
 
-        <TextBlock Grid.Row="0" Text="Generator" FontWeight="Bold" />
+    <Grid Background="#222">
+        <StackPanel Margin="20">
+            <TextBlock Text="Wybierz efekt audio:"
+                       Foreground="White"
+                       FontSize="18"
+                       Margin="0,0,0,10"/>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5">
-            <TextBox Width="100" Text="{Binding Frequency}" Margin="5,0"/>
-            <TextBox Width="100" Text="{Binding Duration}" Margin="5,0"/>
+            <ListBox ItemsSource="{Binding AvailableEffects}"
+                     SelectedItem="{Binding SelectedEffect}"
+                     Foreground="White"
+                     Background="#333"
+                     BorderThickness="0"
+                     Height="200"/>
+
+            <Button Content="Otwórz efekt"
+                    Command="{Binding OpenEffectCommand}"
+                    Margin="0,10,0,0"
+                    Padding="10,5"/>
         </StackPanel>
-
-        <Button Grid.Row="2" Content="Generate" Command="{Binding GenerateCommand}" Margin="5"/>
     </Grid>
 </UserControl>
+
 
