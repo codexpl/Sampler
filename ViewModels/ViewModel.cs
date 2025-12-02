@@ -24,7 +24,7 @@ namespace Sampler.ViewModels {
 
         public ICommand ShowFileCommand         { get; }
         public ICommand ShowPlayerCommand       { get; }
-        public ICommand ShowGeneratorCommand    { get; }
+        public ICommand ShowEditorCommand       { get; }
 
 
         public      LogService               LogService         { get; private set; }
@@ -44,19 +44,19 @@ namespace Sampler.ViewModels {
 
         public      MenuFileViewModel       MenuFile           { get; set; }
         public      MenuPlayerViewViewModel MenuPlayer         { get; set; }
-        public      MenuGeneratorViewModel  MenuGenerator      { get; set; }
+        public      MenuEditorViewModel     MenuEditor         { get; set; }
 
 
         public ViewModel( RichTextBox richTextBox ) {
             this.LogService         = new LogService( richTextBox );
             this.MenuFile           = new MenuFileViewModel( (ViewModel) this );
             this.MenuPlayer         = new MenuPlayerViewViewModel( (ViewModel) this );
-            this.MenuGenerator      = new MenuGeneratorViewModel( (ViewModel) this );
+            this.MenuEditor         = new MenuEditorViewModel( (ViewModel) this );
 
             this.CurrentMenu        = this.MenuFile;
             ShowFileCommand         = new RelayCommand  ( ()    => CurrentMenu = this.MenuFile );
             ShowPlayerCommand       = new RelayCommand  ( ()    => CurrentMenu = this.MenuPlayer );
-            ShowGeneratorCommand    = new RelayCommand  ( ()    => CurrentMenu = this.MenuGenerator );
+            ShowEditorCommand       = new RelayCommand  ( ()    => CurrentMenu = this.MenuEditor );
         }
     }
 }

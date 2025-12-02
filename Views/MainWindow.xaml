@@ -34,7 +34,7 @@
             <StackPanel Orientation="Horizontal">
                 <Button Content="File" Command="{Binding ShowFileCommand}" Margin="5"/>
                 <Button Content="Player" Command="{Binding ShowPlayerCommand}" Margin="5"/>
-                <Button Content="Generator" Command="{Binding ShowGeneratorCommand}" Margin="5"/>
+                <Button Content="Generator" Command="{Binding ShowEditorCommand}" Margin="5"/>
             </StackPanel>
         </Border>
 

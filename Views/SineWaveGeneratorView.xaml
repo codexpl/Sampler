@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="Sampler.Views.SineWaveGeneratorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Height="98">
+        <Label Content="Frequency" HorizontalAlignment="Center" Foreground="White" FontSize="7" Margin="0,0,0,1"/>
+        <TextBox TextWrapping="Wrap" Text="400" Width="120"/>
+        <TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>
+        <Button Content="Generuj" Command="{Binding GenerateSineCommand}" FontFamily="Simplex" FontWeight="Bold" FontSize="9"/>
+    </StackPanel>
+</UserControl>

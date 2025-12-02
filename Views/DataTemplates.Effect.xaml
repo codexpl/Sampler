@@ -4,18 +4,17 @@
                     xmlns:vm="clr-namespace:Sampler.ViewModels"
                     xmlns:vmenu="clr-namespace:Sampler.ViewModels.Menu">
 
-    <DataTemplate DataType="{x:Type vmenu:MenuFileViewModel}">
-        <views:MenuFileView/>
+
+    <DataTemplate DataType="{x:Type vm:GainViewModel}">
+        <views:GainView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vmenu:MenuPlayerViewViewModel}">
-        <views:MenuPlayerView/>
+    <DataTemplate DataType="{x:Type vm:SineWaveGeneratorViewModel}">
+        <views:SineWaveGeneratorView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vmenu:MenuEditorViewModel}">
-        <views:MenuEditorView/>
+    <DataTemplate DataType="{x:Type vm:FadeViewModel}">
+        <views:FadeView/>
     </DataTemplate>
-
-
 
 </ResourceDictionary>

@@ -1,0 +1,54 @@
+﻿using Sampler.ViewModels;
+
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sampler.ViewModels.Menu
+{
+            public class MenuEditorViewModel : BaseViewModel  {
+                public ObservableCollection<EffectItem> AvailableEffects { get; }
+                public EffectItem SelectedEffect
+                {
+                    get => _selectedEffect;
+                    set
+                    {
+                        _selectedEffect = value;
+                        OnPropertyChanged();
+                        LoadEffectViewModel(value);
+                    }
+                }
+
+                private EffectItem _selectedEffect;
+                public BaseViewModel CurrentEffectViewModel { get; private set; }
+
+                public MenuEditorViewModel( ViewModel viewModel )    {
+                    AvailableEffects = new ObservableCollection<EffectItem>
+                    {
+                        new EffectItem("Gain", () => new GainViewModel()),
+                        new EffectItem("Sine Wave Generator", () => new SineWaveGeneratorViewModel()),
+                        new EffectItem("Fade", () => new FadeViewModel())
+                    };
+                }
+
+                private void LoadEffectViewModel(EffectItem effect)   {
+                    CurrentEffectViewModel = effect.CreateViewModel();
+                    OnPropertyChanged(nameof(CurrentEffectViewModel));
+                }
+            }
+
+            public class EffectItem    {
+                public string Name { get; }
+                public Func<BaseViewModel> CreateViewModel { get; }
+
+                public EffectItem(string name, Func<BaseViewModel> factory)  {
+                    Name = name;
+                    CreateViewModel = factory;
+                }
+            }
+
+}
