@@ -26,10 +26,7 @@ using Sampler.Services.AppConfiguration;
 
 
 namespace Sampler.ViewModels.Menu {
- public class MenuFileViewModel:INotifyPropertyChanged {
-
-                    public event PropertyChangedEventHandler? PropertyChanged;
-                    protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); 
+ public class MenuFileViewModel:BaseViewModel {
 
 
                     public      ViewModel           VModel          { get; set; }

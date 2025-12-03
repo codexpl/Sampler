@@ -21,10 +21,12 @@ namespace Sampler
     public partial class MainWindow : Window
     {
 
+        private  readonly   LogService       _logService;
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModel ( LogBox );
+            _logService = new LogService( LogBox );
+            DataContext = new ViewModel ( _logService );
         }
     }
 }

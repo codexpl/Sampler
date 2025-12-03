@@ -13,13 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Sampler.ViewModels {
-    public  class ViewModel:INotifyPropertyChanged {
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-
-
+    public  class ViewModel:BaseViewModel {
 
 
         public ICommand ShowFileCommand         { get; }
@@ -37,7 +31,7 @@ namespace Sampler.ViewModels {
             set
             {
                 _currentMenu = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentMenu)));
+                OnPropertyChanged(nameof(CurrentMenu));
             }   
         }
 
@@ -47,8 +41,9 @@ namespace Sampler.ViewModels {
         public      MenuEditorViewModel     MenuEditor         { get; set; }
 
 
-        public ViewModel( RichTextBox richTextBox ) {
-            this.LogService         = new LogService( richTextBox );
+        public ViewModel( LogService logService ) {
+
+            this.LogService         = logService;
             this.MenuFile           = new MenuFileViewModel( (ViewModel) this );
             this.MenuPlayer         = new MenuPlayerViewViewModel( (ViewModel) this );
             this.MenuEditor         = new MenuEditorViewModel( (ViewModel) this );

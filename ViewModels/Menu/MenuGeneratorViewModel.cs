@@ -11,10 +11,9 @@ using Sampler.Models;
 using Sampler.Services.Audio;
 
 namespace Sampler.ViewModels.Menu {
-    public  class MenuGeneratorViewModel:INotifyPropertyChanged {
+    public  class MenuGeneratorViewModel:BaseViewModel {
 
-            public event PropertyChangedEventHandler? PropertyChanged;
-            protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
 
             public      ViewModel       VModel              { get; set; }
             public      ICommand        GenerateCommand     { get; set; }
@@ -23,14 +22,14 @@ namespace Sampler.ViewModels.Menu {
             public int Frequency
             {
                 get => _frequency;
-                set { _frequency = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Frequency))); }
+                set { _frequency = value; OnPropertyChanged(nameof(Frequency)); }
             }
 
             private int _duration;
             public int Duration
             {
                 get => _duration;
-                set { _duration = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Duration))); }
+                set { _duration = value; OnPropertyChanged(nameof(Duration)); }
             }
 
 

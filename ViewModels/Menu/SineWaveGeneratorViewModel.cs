@@ -8,5 +8,6 @@ namespace Sampler.ViewModels
 {
     class SineWaveGeneratorViewModel:BaseViewModel
     {
+
     }
 }
