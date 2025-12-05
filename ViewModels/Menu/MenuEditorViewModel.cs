@@ -23,13 +23,17 @@ namespace Sampler.ViewModels.Menu
                     }
                 }
 
-                private EffectItem _selectedEffect;
+                
+                
+                public  readonly    ViewModel       ViewModel;
+                private             EffectItem      _selectedEffect;
                 public BaseViewModel CurrentEffectViewModel { get; private set; }
 
                 public MenuEditorViewModel( ViewModel viewModel )    {
+                    ViewModel =  viewModel;
                     AvailableEffects = new ObservableCollection<EffectItem>
                     {
-                        new EffectItem("Gain", () => new GainViewModel()),
+                        new EffectItem("Gain", () => new GainViewModel(this)),
                         new EffectItem("Sine Wave Generator", () => new SineWaveGeneratorViewModel()),
                         new EffectItem("Fade", () => new FadeViewModel())
                     };

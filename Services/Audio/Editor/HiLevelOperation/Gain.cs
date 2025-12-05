@@ -42,12 +42,14 @@ namespace Sampler.Services.Audio
                     }
                 }
 
+
+
                 /// <summary>
                 ///     Oblicza maksymalny gain, który można zastosować
                 ///     bez ryzyka przesterowania (clipping).
                 /// </summary>
                 /// <returns>Maksymalny bezpieczny współczynnik gain</returns>
-                public float GetSafeGain()   {
+                private float GetSafeGain()   {
                     int sampleCount = GetCurrentSampleCounter();
                     int maxSignal = 0;
 
