@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSCore;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,24 +13,22 @@ namespace Sampler.Services.Audio
 {
 
     public partial class Editor  {
-        public void CreateSineWave( int amplitude, int duration )
-        {
-              
+        public void CreateSineWave( int frequency, int samples ) {
+                    int sampleRate = _sampler.Header.SampleRate;
+                    int totalBytes = samples * 3 * 2; 
+                    _sampler.Buffer = new BufferPcm24( new byte[totalBytes] );
+
+                    double amplitude = 8388607; // max value for 24 bit
+                    double twoPiF = 2 * Math.PI * frequency;
+
+                    for (int i = 0; i < samples; i++)   {
+                        double t = (double)i / sampleRate;
+                        int sampleValue = (int)(Math.Sin(twoPiF * t) * amplitude);
+
+                        int offset = i * 6;
+                        _sampler.Buffer.Write24Bit(offset, sampleValue);       // Left
+                        _sampler.Buffer.Write24Bit(offset + 3, sampleValue);   // Right
+                    }
         }
     }
 }
-
-/*
-public float[] GenerateSineWave(int sampleRate, double frequency, double durationSeconds)
-{
-    int sampleCount = (int)(sampleRate * durationSeconds);
-    float[] buffer = new float[sampleCount];
-
-    for (int n = 0; n < sampleCount; n++)
-    {
-        buffer[n] = (float)Math.Sin(2 * Math.PI * frequency * n / sampleRate);
-    }
-
-    return buffer;
-}
-*/

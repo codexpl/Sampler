@@ -34,8 +34,9 @@ namespace Sampler.ViewModels.Menu
                     AvailableEffects = new ObservableCollection<EffectItem>
                     {
                         new EffectItem("Gain", () => new GainViewModel(this)),
-                        new EffectItem("Sine Wave Generator", () => new SineWaveGeneratorViewModel()),
-                        new EffectItem("Fade", () => new FadeViewModel())
+                        new EffectItem("Sine Wave Generator", () => new SineWaveGeneratorViewModel(this)),
+                        new EffectItem("Fade", () => new FadeViewModel(this)),
+                        new EffectItem("To Mono", () => new ToMonoViewModel(this))
                     };
                 }
 

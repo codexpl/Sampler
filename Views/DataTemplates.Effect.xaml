@@ -17,4 +17,9 @@
         <views:FadeView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ToMonoViewModel}">
+        <views:ToMonoView/>
+    </DataTemplate>
+
+
 </ResourceDictionary>
