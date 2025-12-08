@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Sampler.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy MenuEditorView.xaml
+    /// Logika interakcji dla klasy MenuView.xaml
     /// </summary>
-    public partial class MenuEditorView : UserControl
+    public partial class MenuView : UserControl
     {
-        public MenuEditorView()
+        public MenuView()
         {
             InitializeComponent();
         }

@@ -14,7 +14,7 @@ namespace Sampler.ViewModels
 
             public ICommand ApplyGainCommand { get; set; }
 
-            private readonly    MenuEditorViewModel _menuEditorViewModel;
+            private readonly    MenuViewModel _menuEditorViewModel;
             private double      _gainFactor = 1.0;
             public  double      GainFactor { 
                 get => _gainFactor;
@@ -26,7 +26,7 @@ namespace Sampler.ViewModels
                     }
                 }
             }
-            public GainViewModel( MenuEditorViewModel menuEditorViewModel ) 
+            public GainViewModel( MenuViewModel menuEditorViewModel ) 
             {   
                 _menuEditorViewModel = menuEditorViewModel;
                 _menuEditorViewModel.ViewModel.LogService.Append("[INFO]GainViewModel initialized.");

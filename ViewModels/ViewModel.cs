@@ -16,13 +16,14 @@ namespace Sampler.ViewModels {
     public  class ViewModel:BaseViewModel {
 
 
-        public ICommand ShowFileCommand         { get; }
-        public ICommand ShowPlayerCommand       { get; }
         public ICommand ShowEditorCommand       { get; }
 
 
         public      LogService               LogService         { get; private set; }
-        public      WaveSampler              Sampler           { get; set; } = new WaveSampler();
+        public      WaveSampler              Sampler            { get; set; } = new WaveSampler();
+
+
+
 
 
         private     object                  _currentMenu;    
@@ -36,22 +37,17 @@ namespace Sampler.ViewModels {
         }
 
 
-        public      MenuFileViewModel       MenuFile           { get; set; }
-        public      MenuPlayerViewViewModel MenuPlayer         { get; set; }
-        public      MenuEditorViewModel     MenuEditor         { get; set; }
+
+        public      MenuViewModel           Menu         { get; set; }
 
 
         public ViewModel( LogService logService ) {
 
             this.LogService         = logService;
-            this.MenuFile           = new MenuFileViewModel( (ViewModel) this );
-            this.MenuPlayer         = new MenuPlayerViewViewModel( (ViewModel) this );
-            this.MenuEditor         = new MenuEditorViewModel( (ViewModel) this );
+            this.Menu               = new MenuViewModel( (ViewModel) this );
 
-            this.CurrentMenu        = this.MenuFile;
-            ShowFileCommand         = new RelayCommand  ( ()    => CurrentMenu = this.MenuFile );
-            ShowPlayerCommand       = new RelayCommand  ( ()    => CurrentMenu = this.MenuPlayer );
-            ShowEditorCommand       = new RelayCommand  ( ()    => CurrentMenu = this.MenuEditor );
+            this.CurrentMenu        = this.Menu;
+            ShowEditorCommand       = new RelayCommand  ( ()    => CurrentMenu = this.Menu );
         }
     }
 }

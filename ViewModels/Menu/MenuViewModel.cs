@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sampler.ViewModels.Menu
 {
-            public class MenuEditorViewModel : BaseViewModel  {
+            public class MenuViewModel : BaseViewModel  {
                 public ObservableCollection<EffectItem> AvailableEffects { get; }
                 public EffectItem SelectedEffect
                 {
@@ -29,7 +29,7 @@ namespace Sampler.ViewModels.Menu
                 private             EffectItem      _selectedEffect;
                 public BaseViewModel CurrentEffectViewModel { get; private set; }
 
-                public MenuEditorViewModel( ViewModel viewModel )    {
+                public MenuViewModel( ViewModel viewModel )    {
                     ViewModel =  viewModel;
                     AvailableEffects = new ObservableCollection<EffectItem>
                     {

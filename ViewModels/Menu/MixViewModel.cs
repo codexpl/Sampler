@@ -14,7 +14,7 @@ namespace Sampler.ViewModels
 {
     public class MixViewModel:BaseViewModel
     {
-        private readonly    MenuEditorViewModel _menuEditorViewModel;
+        private readonly    MenuViewModel _menuEditorViewModel;
 
         public ICommand     LoadXCommand            { get; }
         public ICommand     LoadYCommand            { get; }
@@ -23,7 +23,7 @@ namespace Sampler.ViewModels
         private  WaveSampler        _waveX;
         private  WaveSampler        _waveY;
 
-        public MixViewModel(MenuEditorViewModel menuEditorViewModel)
+        public MixViewModel(MenuViewModel menuEditorViewModel)
         {
             _menuEditorViewModel = menuEditorViewModel;
             LoadXCommand = new Helpers.RelayCommand(Loadx);

@@ -11,10 +11,10 @@ namespace Sampler.ViewModels
 {
     public class ToMonoViewModel:BaseViewModel
     {
-        private readonly    MenuEditorViewModel _menuEditorViewModel;
+        private readonly    MenuViewModel _menuEditorViewModel;
         public ICommand     ToMonoCommand       { get; } 
 
-        public ToMonoViewModel(MenuEditorViewModel menuEditorViewModel)
+        public ToMonoViewModel(MenuViewModel menuEditorViewModel)
         {
             _menuEditorViewModel = menuEditorViewModel;
             ToMonoCommand = new Helpers.RelayCommand(ToMono);

@@ -17,8 +17,8 @@ namespace Sampler.ViewModels
             public ICommand FadeOutCommand          { get; }
 
 
-            private readonly    MenuEditorViewModel _menuEditorViewModel;
-            public FadeViewModel( MenuEditorViewModel menuEditorViewModel )    {   
+            private readonly    MenuViewModel _menuEditorViewModel;
+            public FadeViewModel( MenuViewModel menuEditorViewModel )    {   
                 _menuEditorViewModel = menuEditorViewModel;
                 FadeInCommand  = new RelayCommand(FadeIn);
                 FadeOutCommand = new RelayCommand(FadeOut);

@@ -43,8 +43,8 @@ namespace Sampler.ViewModels
 
 
 
-        private readonly MenuEditorViewModel _menuEditorViewModel;
-            public SineWaveGeneratorViewModel( MenuEditorViewModel menuEditorViewModel) {
+        private readonly MenuViewModel _menuEditorViewModel;
+            public SineWaveGeneratorViewModel( MenuViewModel menuEditorViewModel) {
                 _menuEditorViewModel = menuEditorViewModel;
                 GenerateSineCommand = new Helpers.RelayCommand(GenerateSineWave);
                 _menuEditorViewModel.ViewModel.LogService.Append("[INFO]SineWaveGeneratorViewModel initialized.");
