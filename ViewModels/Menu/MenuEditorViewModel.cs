@@ -36,7 +36,8 @@ namespace Sampler.ViewModels.Menu
                         new EffectItem("Gain", () => new GainViewModel(this)),
                         new EffectItem("Sine Wave Generator", () => new SineWaveGeneratorViewModel(this)),
                         new EffectItem("Fade", () => new FadeViewModel(this)),
-                        new EffectItem("To Mono", () => new ToMonoViewModel(this))
+                        new EffectItem("To Mono", () => new ToMonoViewModel(this)),
+                        new EffectItem("Mix", () => new MixViewModel(this))
                     };
                 }
 

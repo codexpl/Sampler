@@ -11,24 +11,27 @@ using Sampler.Services.Audio;
 namespace Sampler.Services.Audio {
     public partial class Editor {
 
-            private     int         _sizeOfSample       =   0;  
+            private     int          _sizeOfSample     =   0;  
             public      bool         IsSuccess         { get; private set; }
 
 
 
 
-            private readonly WaveSampler        _sampler;
+
+            public WaveHeader         Header         =   new WaveHeader();
+            public BufferPcm24        Buffer         =   new BufferPcm24( new byte[0] );              
 
 
 
 
-            public Editor( WaveSampler sampler ) {
+
+            public Editor( WaveHeader header, byte[] audioData ) {
                 
-                this._sampler       =   sampler;
-                this._sizeOfSample  =   _sampler.Header.BitsPerSample / 8;
+                this.Header         =   header;
+                this.Buffer         =   new BufferPcm24( audioData );
+                this._sizeOfSample  =   Header.BitsPerSample / 8;
                 IsSuccess = true;
             }
-
-            
+  
     }
 }

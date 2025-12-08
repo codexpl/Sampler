@@ -37,8 +37,8 @@ namespace Sampler.ViewModels
 
             private void ApplyGain()
             {
-                _menuEditorViewModel.ViewModel.WaveSmpl.Editor.ApplyGain( (float) GainFactor );
-                _menuEditorViewModel.ViewModel.WaveSmpl.Buffer.Play();
+                _menuEditorViewModel.ViewModel.Sampler.Edit.ApplyGain( (float) GainFactor );
+                _menuEditorViewModel.ViewModel.Sampler.Edit.Buffer.Play();
                 _menuEditorViewModel.ViewModel.LogService.Append("[INFO]ApplyGain command executed.");
             }
     }

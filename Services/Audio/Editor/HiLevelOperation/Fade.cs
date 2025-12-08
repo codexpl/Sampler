@@ -13,8 +13,8 @@ namespace Sampler.Services.Audio
 
             public void ApplyFade(bool fadeIn)
             {
-                int sampleRate = _sampler.Header.SampleRate;
-                int totalSamples = _sampler.Buffer.Bytes.Length / 6; // stereo, 3 bajty na kanał
+                int sampleRate = Header.SampleRate;
+                int totalSamples = Buffer.Bytes.Length / 6; // stereo, 3 bajty na kanał
 
                 for (int i = 0; i < totalSamples; i++)
                 {
@@ -26,12 +26,12 @@ namespace Sampler.Services.Audio
                     int offset = i * 6;
 
                     // odczyt próbek
-                    int left  = _sampler.Buffer.Read24Bit(offset);
-                    int right = _sampler.Buffer.Read24Bit(offset + 3);
+                    int left  = Buffer.Read24Bit(offset);
+                    int right = Buffer.Read24Bit(offset + 3);
 
                     // zapis z uwzględnieniem współczynnika
-                    _sampler.Buffer.Write24Bit(offset,     (int)(left  * factor));
-                    _sampler.Buffer.Write24Bit(offset + 3, (int)(right * factor));
+                    Buffer.Write24Bit(offset,     (int)(left  * factor));
+                    Buffer.Write24Bit(offset + 3, (int)(right * factor));
                 }
             }
     }

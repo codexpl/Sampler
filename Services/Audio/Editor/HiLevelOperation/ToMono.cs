@@ -33,7 +33,7 @@ namespace Sampler.Services.Audio
                 return totalSamples;
             }
 
-            private int GetAverage( int valuex, int valuey ) => ( valuex + valuey ) / 2;
+        private int GetAverage( int valuex, int valuey ) => ( valuex + valuey ) / 2;
             
     }
 }

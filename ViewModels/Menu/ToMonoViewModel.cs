@@ -22,7 +22,7 @@ namespace Sampler.ViewModels
 
         private void ToMono()
         {
-            int result = _menuEditorViewModel.ViewModel.WaveSmpl.Editor.ToMono();
+            int result = _menuEditorViewModel.ViewModel.Sampler.Edit.ToMono();
             _menuEditorViewModel.ViewModel.LogService.Append($"[INFO]  Converting to Mono... {result} samples");
         }
     }

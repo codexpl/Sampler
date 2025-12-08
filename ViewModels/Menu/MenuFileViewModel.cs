@@ -36,9 +36,9 @@ namespace Sampler.ViewModels.Menu {
 
 
             public MenuFileViewModel( ViewModel viewModel ) {          
-                    VModel     = viewModel;
-                    OpenCommand    = new RelayCommand(Open);       
-                    SaveCommand    = new RelayCommand(Save);             
+                    VModel          = viewModel;
+                    OpenCommand     = new RelayCommand(Open);       
+                    SaveCommand     = new RelayCommand(Save);             
             }
 
 
@@ -49,10 +49,10 @@ namespace Sampler.ViewModels.Menu {
                 if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                    VModel.WaveSmpl = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
+                    VModel.Sampler = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
                 }           
-                VModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + VModel.WaveSmpl.Buffer.Bytes.Length );
-                VModel.WaveSmpl.Buffer.Play();
+                VModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + VModel.Sampler.Edit.Buffer.Bytes.Length );
+                VModel.Sampler.Edit.Buffer.Play();
             }
 
             private void Save() {
@@ -60,7 +60,7 @@ namespace Sampler.ViewModels.Menu {
                 if( Directory.Exists( AppConfiguration.getWriteDirectory() ) ) saveFileDialog.InitialDirectory = AppConfiguration.getWriteDirectory();
                 if (saveFileDialog.ShowDialog() == true) {
                     var filePath = saveFileDialog.FileName;
-                    File.WriteAllBytes( filePath, VModel.WaveSmpl.ToWaveFile24() );
+                    File.WriteAllBytes( filePath, VModel.Sampler.ToWaveFile24() );
                 }
                 VModel.LogService.Append( "[INFO] Saved file." );
             }

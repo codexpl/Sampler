@@ -25,8 +25,7 @@ namespace Sampler.Services.Audio {
 
 
             public      WaveHeader          Header          =  new WaveHeader();
-            public      BufferPcm24         Buffer          =  null!;               // ToDo   na tym buforze ni
-            public      Editor              Editor          =  null!;
+            public      Editor              Edit          =  null!;
 
 
 
@@ -45,20 +44,20 @@ namespace Sampler.Services.Audio {
         /// </summary>
         /// <param name="data"> odczytany plik wav </param>
         public WaveSampler(byte[] data) {    
-                    if ( data.Length < 44 || Encoding.ASCII.GetString( data, 0, 4) != "RIFF") {
+
+                  this.Header = WaveHeaderParser.Parse(data);
+                  if( ! Header.IsValid() )   { 
                         _status = ObjectStatus.ERROR;
-                        _statusMessage =    GetType().Name  + "\n nieprawidłowe dane wejsciowe. spodziewano danych pliku WAV";
+                        _statusMessage =    nameof(WaveSampler)   + "\n nieprawidłowe dane wejsciowe. spodziewano danych pliku WAV";
                         return;
                     }
-                    _oryginalData = (byte[]) data.Clone();
-                    LoadFromBytes( _oryginalData );
-                    this.Editor =   new Editor( this );
-                    if ( Header.Subchunk2Size + 44 != _oryginalData.Length ) {
-                        _status = ObjectStatus.WARNING;
-                        _statusMessage =    GetType().Name  + 
-                                    "\n nieprawidłowe dane wejsciowe. rozmiar danych audio nie zgadza się z wartością pola Subchunk2Size";
-                        return;
-                    }
+
+                  _oryginalData           = (byte[]) data.Clone();
+                  int   startDataIndex    = data.Length - Header.Subchunk2Size;
+                  byte[] audioData        = new byte[Header.Subchunk2Size];
+                  Array.Copy(data, startDataIndex, audioData, 0, Header.Subchunk2Size);
+
+                  this.Edit =   new Editor( Header, audioData );            
         }
 
 

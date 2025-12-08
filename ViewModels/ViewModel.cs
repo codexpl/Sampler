@@ -22,7 +22,7 @@ namespace Sampler.ViewModels {
 
 
         public      LogService               LogService         { get; private set; }
-        public      WaveSampler              WaveSmpl           { get; set; } = new WaveSampler();
+        public      WaveSampler              Sampler           { get; set; } = new WaveSampler();
 
 
         private     object                  _currentMenu;    

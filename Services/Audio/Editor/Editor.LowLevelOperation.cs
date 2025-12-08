@@ -12,7 +12,7 @@ namespace Sampler.Services.Audio {
             ///     zwraca aktualna ilośc probek w Buffer.
             /// </summary>
             /// <returns></returns>
-            public  int     GetCurrentSampleCounter() =>  _sampler.Buffer.Bytes.Length / ( this._sizeOfSample * _sampler.Header.NumChannels ); 
+            public  int     GetCurrentSampleCounter() =>  Buffer.Bytes.Length / ( this._sizeOfSample * Header.NumChannels ); 
 
 
             /// <summary>
@@ -38,7 +38,7 @@ namespace Sampler.Services.Audio {
             /// </summary>
             /// <param name="sampleNr"></param>
             /// <returns></returns>
-            private int     _getStartPoint(int sampleNr)  => (sampleNr - 1) * _sampler.Header.NumChannels * _sizeOfSample;
+            private int     _getStartPoint(int sampleNr)  => (sampleNr - 1) * Header.NumChannels * _sizeOfSample;
     
 
 
@@ -57,9 +57,9 @@ namespace Sampler.Services.Audio {
             /// </returns>
             private int SampleNrToIndex(int sampleNr, int channel = LChannel)
             {
-                if (_sampler == null || _sampler.Buffer == null || _sampler.Buffer.Bytes == null)           return NullBufferError;
+                if ( Buffer == null || Buffer.Bytes == null)                                              return NullBufferError;
 
-                if (_sampler.Header == null || _sampler.Header.NumChannels <= 0 )                           return HeaderError;
+                if (Header == null || Header.NumChannels <= 0 )                                           return HeaderError;
 
                 if (!IsInRange(sampleNr))                                                                   return OutOfRangeError;
 
@@ -77,7 +77,7 @@ namespace Sampler.Services.Audio {
                 int index = SampleNrToIndex(sampleNr, channel);
                 if ( IsErrorCode(index) ) {  this.IsSuccess = false; return index;  }
                 IsSuccess = true;
-                return this._sampler.Buffer.Read24Bit(index);
+                return this.Buffer.Read24Bit(index);
             }
 
 
@@ -85,7 +85,7 @@ namespace Sampler.Services.Audio {
                 int index = SampleNrToIndex( sampleNr, channel);
                 if( IsErrorCode(index)) { this.IsSuccess = false;  return index; }
                 this.IsSuccess = true;
-                this._sampler.Buffer.Write24Bit(index, newValue);
+                this.Buffer.Write24Bit(index, newValue);
                 return Success; 
             }
     }

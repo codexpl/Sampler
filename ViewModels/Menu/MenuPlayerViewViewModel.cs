@@ -25,8 +25,8 @@ namespace Sampler.ViewModels.Menu {
             }
 
             private void Play() {
-                VModel.LogService.Append( $"[INFO] Play command executed. buffer size {VModel.WaveSmpl.Buffer.Bytes.Length} bytes" );
-                VModel.WaveSmpl.Buffer.Play();
+                VModel.LogService.Append( $"[INFO] Play command executed. buffer size {VModel.Sampler.Edit.Buffer.Bytes.Length} bytes" );
+                VModel.Sampler.Edit.Buffer.Play();
             }
     }
 }

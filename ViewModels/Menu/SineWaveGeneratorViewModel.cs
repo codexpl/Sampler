@@ -51,8 +51,8 @@ namespace Sampler.ViewModels
             }
 
             private void GenerateSineWave()  {
-                _menuEditorViewModel.ViewModel.WaveSmpl.Editor.CreateSineWave( Frequency, Duration );
-                _menuEditorViewModel.ViewModel.WaveSmpl.Buffer.Play();
+                _menuEditorViewModel.ViewModel.Sampler.Edit.CreateSineWave( Frequency, Duration );
+                _menuEditorViewModel.ViewModel.Sampler.Edit.Buffer.Play();
                 _menuEditorViewModel.ViewModel.LogService.Append("[INFO]GenerateSineWave command executed.");
             }
     }
