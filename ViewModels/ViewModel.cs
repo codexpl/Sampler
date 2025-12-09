@@ -20,7 +20,8 @@ namespace Sampler.ViewModels {
 
 
         public      LogService               LogService         { get; private set; }
-        public      WaveSampler              Sampler            { get; set; } = new WaveSampler();
+        public      WaveSampler              waveDst            { get; set; } = new WaveSampler();
+        public      WaveSampler              waveSrc            { get; set; } = new WaveSampler();
 
 
 

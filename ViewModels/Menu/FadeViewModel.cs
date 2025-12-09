@@ -17,21 +17,21 @@ namespace Sampler.ViewModels
             public ICommand FadeOutCommand          { get; }
 
 
-            private readonly    MenuViewModel _menuEditorViewModel;
-            public FadeViewModel( MenuViewModel menuEditorViewModel )    {   
-                _menuEditorViewModel = menuEditorViewModel;
+            private readonly    ViewModel   _viewModel;
+            public FadeViewModel( ViewModel viewModel )    {   
+                _viewModel = viewModel;
                 FadeInCommand  = new RelayCommand(FadeIn);
                 FadeOutCommand = new RelayCommand(FadeOut);
             }
 
             private void FadeIn() {
-                _menuEditorViewModel.ViewModel.Sampler.Edit.ApplyFade(true);
-                _menuEditorViewModel.ViewModel.Sampler.Edit.Buffer.Play();
+                _viewModel.waveDst.Edit.ApplyFade(true);
+                _viewModel.waveDst.Edit.Buffer.Play();
             }
 
             private void FadeOut()  {
-                _menuEditorViewModel.ViewModel.Sampler.Edit.ApplyFade(false);
-                _menuEditorViewModel.ViewModel.Sampler.Edit.Buffer.Play();
+                _viewModel.waveDst.Edit.ApplyFade(false);
+                _viewModel.waveDst.Edit.Buffer.Play();
             }
     }
 }

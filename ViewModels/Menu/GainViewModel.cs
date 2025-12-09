@@ -7,14 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Sampler.ViewModels
-{
-    class GainViewModel:BaseViewModel
-    {
+namespace Sampler.ViewModels  {
+    class GainViewModel:BaseViewModel  {
 
             public ICommand ApplyGainCommand { get; set; }
 
-            private readonly    MenuViewModel _menuEditorViewModel;
+            private readonly    ViewModel _viewModel;
             private double      _gainFactor = 1.0;
             public  double      GainFactor { 
                 get => _gainFactor;
@@ -22,24 +20,22 @@ namespace Sampler.ViewModels
                     if ( _gainFactor != value ) {
                         _gainFactor = value;
                         OnPropertyChanged();
-                        _menuEditorViewModel.ViewModel.LogService.Append($"[INFO] GainFactor changed to { _gainFactor }");
+                        _viewModel.LogService.Append($"[INFO] GainFactor changed to { _gainFactor }");
                     }
                 }
             }
-            public GainViewModel( MenuViewModel menuEditorViewModel ) 
-            {   
-                _menuEditorViewModel = menuEditorViewModel;
-                _menuEditorViewModel.ViewModel.LogService.Append("[INFO]GainViewModel initialized.");
 
+            public GainViewModel( ViewModel viewModel )  {   
+                _viewModel = viewModel;
                 ApplyGainCommand = new Helpers.RelayCommand(ApplyGain);
+                _viewModel.LogService.Append("[INFO]GainViewModel initialized.");
             }
 
 
-            private void ApplyGain()
-            {
-                _menuEditorViewModel.ViewModel.Sampler.Edit.ApplyGain( (float) GainFactor );
-                _menuEditorViewModel.ViewModel.Sampler.Edit.Buffer.Play();
-                _menuEditorViewModel.ViewModel.LogService.Append("[INFO]ApplyGain command executed.");
+            private void ApplyGain()   {
+                _viewModel.waveDst.Edit.ApplyGain( (float) GainFactor );
+                _viewModel.waveDst.Edit.Buffer.Play();
+                _viewModel.LogService.Append("[INFO]ApplyGain command executed.");
             }
     }
 }

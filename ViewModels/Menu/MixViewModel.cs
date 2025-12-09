@@ -14,51 +14,62 @@ namespace Sampler.ViewModels
 {
     public class MixViewModel:BaseViewModel
     {
-        private readonly    MenuViewModel _menuEditorViewModel;
+        private readonly    ViewModel               _viewModel;
 
-        public ICommand     LoadXCommand            { get; }
-        public ICommand     LoadYCommand            { get; }
-        public ICommand     MixCommand              { get; } 
+        public ICommand     LoadSourceCommand                   { get; }
+        public ICommand     LoadDestinationCommand              { get; }
+        public ICommand     MixCommand                          { get; } 
 
-        private  WaveSampler        _waveX;
-        private  WaveSampler        _waveY;
 
-        public MixViewModel(MenuViewModel menuEditorViewModel)
-        {
-            _menuEditorViewModel = menuEditorViewModel;
-            LoadXCommand = new Helpers.RelayCommand(Loadx);
-            LoadYCommand = new Helpers.RelayCommand(Loady);
-            MixCommand = new Helpers.RelayCommand(Mix);
+
+        public MixViewModel(ViewModel viewModel) {
+            _viewModel = viewModel;
+            LoadSourceCommand       = new Helpers.RelayCommand(LoadSrc);
+            LoadDestinationCommand  = new Helpers.RelayCommand(LoadDst);
+            MixCommand              = new Helpers.RelayCommand(Mix);
         }
         private void Mix()
         {
-            // int result = _menuEditorViewModel.ViewModel.Sampler.Edit.Mix();
-            // _menuEditorViewModel.ViewModel.LogService.Append($"[INFO]  Mixing Stereo to Mono... {result} samples");
-            _menuEditorViewModel.ViewModel.LogService.Append("[INFO]  Mixing audio files...");
+            int srcSamples = _viewModel.waveSrc.Edit.GetCurrentSampleCounter();
+            int dstSamples = _viewModel.waveDst.Edit.GetCurrentSampleCounter();
+            int minSamples = Math.Min( srcSamples, dstSamples );
+            for ( int i = 1; i <= minSamples; i++ ) {
+              int  Lsrc = _viewModel.waveSrc.Edit.GetLeftSampleValue( i );
+              int  Rsrc = _viewModel.waveSrc.Edit.GetRightSampleValue( i );
+              int  Ldst = _viewModel.waveDst.Edit.GetLeftSampleValue( i );
+              int  Rdst = _viewModel.waveDst.Edit.GetRightSampleValue( i );
+              int  Lmix = AverageSamples( Lsrc, Ldst );
+              int  Rmix = AverageSamples( Rsrc, Rdst );
+              _viewModel.waveDst.Edit.SetLeftSampleValue( i, Lmix );
+              _viewModel.waveDst.Edit.SetRightSampleValue( i, Rmix );
+            }
+            _viewModel.waveDst.Edit.Buffer.Play();
+            _viewModel.LogService.Append("[INFO]  Mixing audio files...");
         }
 
-        private void Loadx()
+        private int AverageSamples( int sampleA, int sampleB ) => ( sampleA + sampleB ) / 2;
+
+        private void LoadSrc()  {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog { Filter = "WAV Files (*.wav)|*.wav|All Files (*.*)|*.*" };
+                if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
+                if (openFileDialog.ShowDialog() == true) {
+                    var filePath = openFileDialog.FileName;
+                    _viewModel.waveSrc = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
+                }           
+                _viewModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + _viewModel.waveSrc.Edit.Buffer.Bytes.Length );
+                _viewModel.waveSrc.Edit.Buffer.Play();
+        }
+
+        private void LoadDst()
         {
             var openFileDialog = new Microsoft.Win32.OpenFileDialog { Filter = "WAV Files (*.wav)|*.wav|All Files (*.*)|*.*" };
                 if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                    _waveX = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
+                    _viewModel.waveDst = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
                 }           
-                _menuEditorViewModel.ViewModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + _waveX.Edit.Buffer.Bytes.Length );
-                _waveX.Edit.Buffer.Play();
-        }
-
-        private void Loady()
-        {
-            var openFileDialog = new Microsoft.Win32.OpenFileDialog { Filter = "WAV Files (*.wav)|*.wav|All Files (*.*)|*.*" };
-                if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
-                if (openFileDialog.ShowDialog() == true) {
-                    var filePath = openFileDialog.FileName;
-                    _waveY = new WaveSampler( (byte[]) File.ReadAllBytes( filePath ) );
-                }           
-                _menuEditorViewModel.ViewModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + _waveY.Edit.Buffer.Bytes.Length );
-                _waveY.Edit.Buffer.Play();
+                _viewModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + _viewModel.waveDst.Edit.Buffer.Bytes.Length );
+                _viewModel.waveDst.Edit.Buffer.Play();
         }
     }
 }

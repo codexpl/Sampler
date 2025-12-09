@@ -11,5 +11,7 @@ namespace Sampler.Services.Audio {
             public int GetRightSampleValue( int sampleNr )              => GetSampleValue(sampleNr, RChannel );
             public int SetLeftSampleValue( int sampleNr, int value )    => SetSampleValue( value, sampleNr, LChannel );
             public int SetRightSampleValue ( int sampleNr, int value )  => SetSampleValue( value, sampleNr, RChannel );
+
+
     }
 }

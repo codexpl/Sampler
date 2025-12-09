@@ -14,20 +14,22 @@ namespace Sampler.ViewModels
 
             public ICommand GenerateSineCommand { get; set; }
 
-            private int _frequency = 100;
-            public int Frequency {
+            private int     _frequency = 100;
+            public int      Frequency {
                 get => _frequency;
                 set {
                     if ( _frequency != value ) {
                         _frequency = value;
                         OnPropertyChanged();
-                        _menuEditorViewModel.ViewModel.LogService.Append($"[INFO] Frequency changed to { _frequency }");
+                        _viewModel.LogService.Append($"[INFO] Frequency changed to { _frequency }");
                     }
                 }
             }
 
-            private int  _duration = 44100; //  sample points
-            public  int  Duration
+
+
+            private int     _duration = 44100; //  sample points
+            public  int     Duration
             {
                 get => _duration;
                 set
@@ -36,24 +38,24 @@ namespace Sampler.ViewModels
                     {
                         _duration = value;
                         OnPropertyChanged();
-                        _menuEditorViewModel.ViewModel.LogService.Append($"[INFO] Duration changed to {_duration}");
+                        _viewModel.LogService.Append($"[INFO] Duration changed to {_duration}");
                     }
                 }
             }
 
 
 
-        private readonly MenuViewModel _menuEditorViewModel;
-            public SineWaveGeneratorViewModel( MenuViewModel menuEditorViewModel) {
-                _menuEditorViewModel = menuEditorViewModel;
+            private readonly ViewModel      _viewModel;
+            public SineWaveGeneratorViewModel( ViewModel viewModel ) {
+                _viewModel = viewModel;
                 GenerateSineCommand = new Helpers.RelayCommand(GenerateSineWave);
-                _menuEditorViewModel.ViewModel.LogService.Append("[INFO]SineWaveGeneratorViewModel initialized.");
+                _viewModel.LogService.Append("[INFO]SineWaveGeneratorViewModel initialized.");
             }
 
             private void GenerateSineWave()  {
-                _menuEditorViewModel.ViewModel.Sampler.Edit.CreateSineWave( Frequency, Duration );
-                _menuEditorViewModel.ViewModel.Sampler.Edit.Buffer.Play();
-                _menuEditorViewModel.ViewModel.LogService.Append("[INFO]GenerateSineWave command executed.");
+                _viewModel.waveDst.Edit.CreateSineWave( Frequency, Duration );
+                _viewModel.waveDst.Edit.Buffer.Play();
+                _viewModel.LogService.Append("[INFO]GenerateSineWave command executed.");
             }
     }
 }

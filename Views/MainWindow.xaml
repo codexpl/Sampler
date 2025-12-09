@@ -17,26 +17,7 @@
             <!-- Log -->
         </Grid.RowDefinitions>
 
-        <!-- Pasek menu -->
-        <Menu Grid.Row="0" Background="#333" Foreground="White">
-            <MenuItem Header="_File">
-                <MenuItem Header="Open" Command="{Binding FileOpenCommand}" />
-                <MenuItem Header="Save" Command="{Binding FileSaveCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Player">
-                <MenuItem Header="Play" Command="{Binding PlayerPlayCommand}" />
-                <MenuItem Header="Stop" Command="{Binding PlayerStopCommand}" />
-            </MenuItem>
-        </Menu>
 
-        <!-- Pasek przycisków do przełączania widoków -->
-        <Border Grid.Row="1" Background="#444" Padding="5">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="File" Command="{Binding ShowFileCommand}" Margin="5"/>
-                <Button Content="Player" Command="{Binding ShowPlayerCommand}" Margin="5"/>
-                <Button Content="Generator" Command="{Binding ShowEditorCommand}" Margin="5"/>
-            </StackPanel>
-        </Border>
 
         <!-- Dynamiczny widok -->
         <Border Grid.Row="2" Margin="10" Padding="10" CornerRadius="8">

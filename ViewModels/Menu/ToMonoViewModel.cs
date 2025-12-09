@@ -11,19 +11,19 @@ namespace Sampler.ViewModels
 {
     public class ToMonoViewModel:BaseViewModel
     {
-        private readonly    MenuViewModel _menuEditorViewModel;
+        private readonly    ViewModel           _viewModel;
         public ICommand     ToMonoCommand       { get; } 
 
-        public ToMonoViewModel(MenuViewModel menuEditorViewModel)
+        public ToMonoViewModel( ViewModel viewModel)
         {
-            _menuEditorViewModel = menuEditorViewModel;
+            _viewModel = viewModel;
             ToMonoCommand = new Helpers.RelayCommand(ToMono);
         }
 
         private void ToMono()
         {
-            int result = _menuEditorViewModel.ViewModel.Sampler.Edit.ToMono();
-            _menuEditorViewModel.ViewModel.LogService.Append($"[INFO]  Converting to Mono... {result} samples");
+            int result = _viewModel.waveDst.Edit.ToMono();
+            _viewModel.LogService.Append($"[INFO]  Converting to Mono... {result} samples");
         }
     }
 }

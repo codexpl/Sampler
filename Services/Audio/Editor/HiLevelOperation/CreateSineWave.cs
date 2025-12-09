@@ -15,8 +15,7 @@ namespace Sampler.Services.Audio
     public partial class Editor  {
         public void CreateSineWave( int frequency, int samples ) {
                     int sampleRate = Header.SampleRate;
-                    int totalBytes = samples * 3 * 2; 
-                    Buffer = new BufferPcm24( new byte[totalBytes] );
+                    CreateBuffer( samples );
 
                     double amplitude = 8388607; // max value for 24 bit
                     double twoPiF = 2 * Math.PI * frequency;

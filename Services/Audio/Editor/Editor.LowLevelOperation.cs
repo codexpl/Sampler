@@ -8,11 +8,18 @@ namespace Sampler.Services.Audio {
     public partial class Editor {
 
 
+            public void     ClearBuffer()   =>  Buffer = new BufferPcm24( new byte[0] );
+            public void     CreateBuffer( int sizeInSamples )  => Buffer = new BufferPcm24( new byte[sizeInSamples * _SIZEOF_SAMPLE * Header.NumChannels] );
+
+
+
+
+
             /// <summary>
             ///     zwraca aktualna ilośc probek w Buffer.
             /// </summary>
             /// <returns></returns>
-            public  int     GetCurrentSampleCounter() =>  Buffer.Bytes.Length / ( this._sizeOfSample * Header.NumChannels ); 
+            public  int     GetCurrentSampleCounter() =>  Buffer.Bytes.Length / ( this._SIZEOF_SAMPLE * Header.NumChannels ); 
 
 
             /// <summary>
@@ -38,7 +45,7 @@ namespace Sampler.Services.Audio {
             /// </summary>
             /// <param name="sampleNr"></param>
             /// <returns></returns>
-            private int     _getStartPoint(int sampleNr)  => (sampleNr - 1) * Header.NumChannels * _sizeOfSample;
+            private int     _getStartPoint(int sampleNr)  => (sampleNr - 1) * Header.NumChannels * _SIZEOF_SAMPLE;
     
 
 
@@ -55,11 +62,11 @@ namespace Sampler.Services.Audio {
             /// -3: NullBufferError – brak danych w buforze
             /// -4: HeaderError – niepoprawny nagłówek
             /// </returns>
-            private int SampleNrToIndex(int sampleNr, int channel = LChannel)
+            public int SampleNrToIndex(int sampleNr, int channel = LChannel)
             {
-                if ( Buffer == null || Buffer.Bytes == null)                                              return NullBufferError;
+                if ( Buffer == null || Buffer.Bytes == null)                                                return NullBufferError;
 
-                if (Header == null || Header.NumChannels <= 0 )                                           return HeaderError;
+                if (Header == null || Header.NumChannels <= 0 )                                             return HeaderError;
 
                 if (!IsInRange(sampleNr))                                                                   return OutOfRangeError;
 
