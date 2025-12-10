@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 using Microsoft.Win32.SafeHandles;
 
-using Sampler.Services.Audio;
-
 namespace Sampler.Services.Audio {
     public partial class Editor {
 

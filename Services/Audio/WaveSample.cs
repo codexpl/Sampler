@@ -1,4 +1,5 @@
-using Sampler.Services.Audio;
+using Sampler.Services.Audio.WaveHeader;
+
 using System;
 using System.Collections.Generic;
 using System.IO;

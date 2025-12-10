@@ -21,4 +21,8 @@
     <PackageReference Include="CSCore" Version="1.2.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Audio\WaveHeader\Code\ToString\" />
+  </ItemGroup>
+
 </Project>

@@ -9,7 +9,11 @@ namespace Sampler.Services.Audio {
 
 
             public void     ClearBuffer()   =>  Buffer = new BufferPcm24( new byte[0] );
-            public void     CreateBuffer( int sizeInSamples )  => Buffer = new BufferPcm24( new byte[sizeInSamples * _SIZEOF_SAMPLE * Header.NumChannels] );
+            public void     CreateBuffer( int sizeInSamples )  {
+                    int  bufferSize = sizeInSamples * _SIZEOF_SAMPLE * Header.NumChannels;
+                    Buffer = new BufferPcm24( new byte[ bufferSize ] );
+                    for ( int i = 0; i < bufferSize; i++ )  Buffer.Bytes[i] = 0;
+            }   
 
 
 
