@@ -15,6 +15,7 @@ namespace Sampler.Services.Audio {
             /// </summary>
             /// <returns></returns>
             public bool IsValid() =>
+                ChunkID.Equals("RIFF", StringComparison.OrdinalIgnoreCase) &&
                 Format.Equals("WAVE", StringComparison.OrdinalIgnoreCase) &&
                 Subchunk1ID.Equals("fmt ", StringComparison.OrdinalIgnoreCase) &&
                 Subchunk2ID.Equals("data", StringComparison.OrdinalIgnoreCase);

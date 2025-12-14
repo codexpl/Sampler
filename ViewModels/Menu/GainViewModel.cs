@@ -33,8 +33,8 @@ namespace Sampler.ViewModels  {
 
 
             private void ApplyGain()   {
-                _viewModel.waveDst.Edit.ApplyGain( (float) GainFactor );
-                _viewModel.waveDst.Edit.Buffer.Play();
+                //_viewModel.SampleR.RegisterA.ApplyGain( (float) GainFactor );
+                _viewModel.SampleR.RegisterA.Play();
                 _viewModel.LogService.Append("[INFO]ApplyGain command executed.");
             }
     }

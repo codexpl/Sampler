@@ -22,8 +22,8 @@ namespace Sampler.ViewModels
 
         private void ToMono()
         {
-            int result = _viewModel.waveDst.Edit.ToMono();
-            _viewModel.LogService.Append($"[INFO]  Converting to Mono... {result} samples");
+            //int result = _viewModel.SampleR.RegisterA.ToMono();
+            _viewModel.LogService.Append($"[INFO]  Converting to Mono... samples");
         }
     }
 }

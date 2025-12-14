@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sampler.ViewModels;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,8 @@ namespace Sampler.Views
         public MixView()
         {
             InitializeComponent();
+            //DataContext = new MixViewModel(App.ViewModel);
+
         }
     }
 }

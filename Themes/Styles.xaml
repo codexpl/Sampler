@@ -4,28 +4,36 @@
                     xmlns:vm="clr-namespace:Sampler.ViewModels"
                     xmlns:vmenu="clr-namespace:Sampler.ViewModels.Menu">
 
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="#555"/>
-            <Setter Property="Foreground" Value="Blue"/>
-            <Setter Property="Padding" Value="8,4"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="#555"/>
+        <Setter Property="Foreground" Value="Blue"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
 
-        <Style TargetType="ContentControl">
-            <Setter Property="Background" Value="#111"/>
-            <Setter Property="Margin" Value="10"/>
-        </Style>
+        <!-- 🔹 Trigger dla stanu Disabled -->
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="#333"/>
+                <!-- ciemniejsze tło -->
+                <Setter Property="Foreground" Value="Gray"/>
+                <!-- wyszarzony tekst -->
+                <Setter Property="Cursor" Value="Arrow"/>
+                <!-- brak "Hand" -->
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
 
 </ResourceDictionary>

@@ -25,13 +25,13 @@ namespace Sampler.ViewModels
             }
 
             private void FadeIn() {
-                _viewModel.waveDst.Edit.ApplyFade(true);
-                _viewModel.waveDst.Edit.Buffer.Play();
+                //_viewModel.SampleR.RegisterA.ApplyFade(true);
+                _viewModel.SampleR.RegisterA.Play();
             }
 
             private void FadeOut()  {
-                _viewModel.waveDst.Edit.ApplyFade(false);
-                _viewModel.waveDst.Edit.Buffer.Play();
+                //_viewModel.SampleR.RegisterA.ApplyFade(false);
+                _viewModel.SampleR.RegisterA.Play();
             }
     }
 }

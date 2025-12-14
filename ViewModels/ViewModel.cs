@@ -1,6 +1,5 @@
 ﻿using Sampler.Helpers;
 using Sampler.Services.AppConfiguration;
-using Sampler.Services.Audio;
 using Sampler.ViewModels.Menu;
 
 using System;
@@ -17,11 +16,16 @@ namespace Sampler.ViewModels {
 
 
         public ICommand ShowEditorCommand       { get; }
+        public ICommand PlayCommand             { get; }
+        public ICommand StopCommand             { get; }
 
+        public ICommand PauseCommand            { get; }
+        public ICommand RewindCommand           { get; }
+        public ICommand ForwardCommand          { get; }
 
-        public      LogService               LogService         { get; private set; }
-        public      WaveSampler              waveDst            { get; set; } = new WaveSampler();
-        public      WaveSampler              waveSrc            { get; set; } = new WaveSampler();
+        public      LogService                      LogService         { get; private set; }
+        public      Services.Audio.Sampler          SampleR            { get; set; } = new Services.Audio.Sampler();
+
 
 
 
@@ -44,11 +48,26 @@ namespace Sampler.ViewModels {
 
         public ViewModel( LogService logService ) {
 
+
             this.LogService         = logService;
+            this.SampleR            = new Services.Audio.Sampler();
             this.Menu               = new MenuViewModel( (ViewModel) this );
+
+            PlayCommand             = new RelayCommand(Play);
+            StopCommand             = new RelayCommand(Stop);
+
 
             this.CurrentMenu        = this.Menu;
             ShowEditorCommand       = new RelayCommand  ( ()    => CurrentMenu = this.Menu );
+
+            LogService.Append("[WARNING] ViewModel initialized.  SampleR.StatusMessage = " + SampleR.StatusMessage );
         }
+
+        private void Play() => SampleR.RegisterA.Play();
+        private void Stop() {
+            SampleR.RegisterB.Stop();
+            SampleR.RegisterA.Stop();
+        }
+
     }
 }

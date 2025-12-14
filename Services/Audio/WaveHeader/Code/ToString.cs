@@ -15,7 +15,8 @@ namespace Sampler.Services.Audio {
                 {
                     string sFormatAudio     =   _getWavFormatDescription(FormatAudio);
 
-                    return $"Rozmiar pliku: . . . . . . . . {ChunkSize}      bajtów\n" +
+                    return $"ChunkID: . . . . . . . . . . . {ChunkID}\n" +
+                           $"Rozmiar pliku: . . . . . . . . {ChunkSize}      bajtów\n" +
                            $"Format:. . . . . . . . . . . . {Format}\n" +
                            $"Subchunk1ID: . . . . . . . . . {Subchunk1ID}\n" +
                            $"Subchunk1Size: . . . . . . . . {Subchunk1Size}\n" + 
