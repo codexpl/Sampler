@@ -30,8 +30,8 @@ namespace Sampler.Services.Audio {
             public Sampler() {
                     RegisterA                   =   new AudioRegister();
                     RegisterB                   =   new AudioRegister();
-                    Status                      =   ObjectStatus.SUCCESS;
-            }
+                    Status                      =   RegisterA.Header.IsValid() && RegisterB.Header.IsValid() ? ObjectStatus.SUCCESS : ObjectStatus.ERROR;
+        }
 
 
 
@@ -42,8 +42,8 @@ namespace Sampler.Services.Audio {
             public Sampler(byte[] data) {    
                   LoadD( data );
                   LoadS( data );
-                  Status                     =   ObjectStatus.SUCCESS;
-            }
+                  Status                        =   RegisterA.Header.IsValid() && RegisterB.Header.IsValid() ? ObjectStatus.SUCCESS : ObjectStatus.ERROR;
+        }
 
             
 
@@ -73,5 +73,6 @@ namespace Sampler.Services.Audio {
 
     }
 }
+
 
 

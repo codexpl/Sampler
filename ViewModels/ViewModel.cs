@@ -60,7 +60,7 @@ namespace Sampler.ViewModels {
             this.CurrentMenu        = this.Menu;
             ShowEditorCommand       = new RelayCommand  ( ()    => CurrentMenu = this.Menu );
 
-            LogService.Append("[WARNING] ViewModel initialized.  SampleR.StatusMessage = " + SampleR.StatusMessage );
+            LogService.Append("[ERROR] ViewModel initialized.  SampleR.StatusMessage = " + SampleR.StatusMessage );
         }
 
         private void Play() => SampleR.RegisterA.Play();
