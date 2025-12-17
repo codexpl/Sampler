@@ -75,7 +75,7 @@ namespace Sampler.ViewModels
 
         private void Mix()
         {
-            _viewModel.SampleR.Append();
+            
             _viewModel.LogService.Append("[INFO]  Appended audio files... at now is " + _viewModel.SampleR.RegisterA.LengthInFrames() + " frames" );
         }
 
@@ -88,7 +88,7 @@ namespace Sampler.ViewModels
                 if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                _viewModel.SampleR.LoadS( (byte[])File.ReadAllBytes( filePath ) );
+                _viewModel.SampleR.LoadB( (byte[])File.ReadAllBytes( filePath ) );
                 }           
                 _viewModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + _viewModel.SampleR.RegisterA.LengthInFrames() + " frames" );
                 IsSourceLoaded = true;
@@ -102,7 +102,7 @@ namespace Sampler.ViewModels
                 if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                _viewModel.SampleR.LoadD( (byte[])File.ReadAllBytes( filePath ) );
+                _viewModel.SampleR.LoadA( (byte[])File.ReadAllBytes( filePath ) );
                 }           
                 _viewModel.LogService.Append( "[INFO] Opened file. Buffer.Bytes.Length = " + + _viewModel.SampleR.RegisterB.LengthInFrames() + " frames" );
                IsDestinationLoaded = true;

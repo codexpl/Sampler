@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sampler.Services.Audio {
-    public partial class AudioRegister {
+    public partial class Register {
 
             private   WaveFormat        _waveFormat     = new WaveFormat( 44100, 24, 2 );
             private   ISoundOut?        _soundOut       = new CSCore.SoundOut.DirectSoundOut();

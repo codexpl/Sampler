@@ -24,7 +24,7 @@ namespace Sampler.ViewModels {
         public ICommand ForwardCommand          { get; }
 
         public      LogService                      LogService         { get; private set; }
-        public      Services.Audio.Sampler          SampleR            { get; set; } = new Services.Audio.Sampler();
+        public      Services.Audio.Core          SampleR            { get; set; } = new Services.Audio.Core();
 
 
 
@@ -50,7 +50,7 @@ namespace Sampler.ViewModels {
 
 
             this.LogService         = logService;
-            this.SampleR            = new Services.Audio.Sampler();
+            this.SampleR            = new Services.Audio.Core();
             this.Menu               = new MenuViewModel( (ViewModel) this );
 
             PlayCommand             = new RelayCommand(Play);

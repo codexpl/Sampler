@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sampler.Services.Audio {
-    public partial class AudioRegister {
+    public partial class Register {
 
-                private byte[]  ExportHeader() => WaveHeaderParser.Serialize( this.Header );
-        
+                private byte[]  ExportHeader() {
+                        this.HeaderUpdate();
+                        return WaveHeaderParser.Serialize( this.Header );
+                }
+
+
                 private byte[]  ExportFrames() {
+                    this.HeaderUpdate();
                     byte[] audioData = new byte[ Header.Subchunk2Size ];
                     for( int i = 0; i < Frames.Count; i++ ) {
                         int frameStart = i * Header.BlockAlign;
@@ -25,6 +30,7 @@ namespace Sampler.Services.Audio {
             }
 
                 public byte[]   ExportWavFile() {
+                    this.HeaderUpdate();
                     byte[] headerBytes = ExportHeader();
                     byte[] frameBytes = ExportFrames();
                     byte[] wavFileBytes = new byte[ headerBytes.Length + frameBytes.Length ];

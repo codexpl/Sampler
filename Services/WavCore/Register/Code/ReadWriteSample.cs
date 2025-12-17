@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sampler.Services.Audio {
-    public partial class AudioRegister {
+    public partial class Register {
 
                 public int      GetLeftSamleValue( int index ) {
                     if( index < 0 || index >= Frames.Count )   throw new IndexOutOfRangeException("Frame index out of range.");
@@ -30,5 +30,16 @@ namespace Sampler.Services.Audio {
                     Frame24 frame = Frames[index];
                     frame.Rvalue( value );
                 }
+
+                public Frame24  GetFrame( int index ) {
+                    if( index < 0 || index >= Frames.Count )   throw new IndexOutOfRangeException("Frame index out of range.");
+                    return Frames[index];
+                }
+
+                public void     SetFrame( Frame24 frame, int index ) {
+                    if( frame == null ) throw new ArgumentNullException(nameof(frame));
+                    Frames[index] = frame;
+                }
+             
     }
 }
