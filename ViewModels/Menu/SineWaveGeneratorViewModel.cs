@@ -53,12 +53,12 @@ namespace Sampler.ViewModels
             }
 
             private void GenerateSineWave()  {
-                if( _viewModel.SampleR == null ) {
+                if( _viewModel.Corx == null ) {
                     _viewModel.LogService.Append("[ERROR]Cannot generate sine wave: No audio file loaded.");
                     return;
                 }
-                //_viewModel.SampleR.RegisterA.CreateSineWave( Frequency, Duration ); 
-                _viewModel.SampleR.RegisterA.Play();
+                //_viewModel.Corx.RegisterA.CreateSineWave( Frequency, Duration ); 
+                _viewModel.Corx.RegisterA.Play();
                 _viewModel.LogService.Append("[INFO]GenerateSineWave command executed.");
             }
     }

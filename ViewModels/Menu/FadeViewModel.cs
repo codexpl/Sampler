@@ -25,13 +25,13 @@ namespace Sampler.ViewModels
             }
 
             private void FadeIn() {
-                //_viewModel.SampleR.RegisterA.ApplyFade(true);
-                _viewModel.SampleR.RegisterA.Play();
+                //_viewModel.Corx.RegisterA.ApplyFade(true);
+                _viewModel.Corx.RegisterA.Play();
             }
 
             private void FadeOut()  {
-                //_viewModel.SampleR.RegisterA.ApplyFade(false);
-                _viewModel.SampleR.RegisterA.Play();
+                //_viewModel.Corx.RegisterA.ApplyFade(false);
+                _viewModel.Corx.RegisterA.Play();
             }
     }
 }

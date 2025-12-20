@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\WavCore\Register\CodeMiddle\" />
     <Folder Include="Services\WavCore\WaveHeader\Code\ToString\" />
   </ItemGroup>
 

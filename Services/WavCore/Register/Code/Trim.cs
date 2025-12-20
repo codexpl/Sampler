@@ -10,15 +10,25 @@ namespace Sampler.Services.Audio {
 
 
 
-        public bool LTrim( int lastFrameIndex ) {
-            if( lastFrameIndex < 0 || lastFrameIndex > Frames.Count )   throw new IndexOutOfRangeException("Frame index out of range."); return false;
-            int totalFrames = Frames.Count;
-            int framesToKeep = lastFrameIndex;
-            int framesToRemove = totalFrames - framesToKeep;
-            // Update Frames list
-            Frames = Frames.Take( framesToKeep ).ToList();
+        public void LTrim( int framesCount ) {
+            List<Frame24> newFrames = Frames.Take( framesCount ).ToList();
+            Frames = newFrames;
             this.HeaderUpdate();
-            return true;
+        }
+
+
+        public void  RTrim( int framesCount ) {
+            int startIndex = Frames.Count - framesCount;
+            List<Frame24> newFrames = Frames.Skip(startIndex ).ToList();
+            Frames = newFrames;
+            this.HeaderUpdate();
+        }
+
+
+        public void Trim( int startIndex, int size ) {
+            List<Frame24> newFrames = Frames.Skip( startIndex ).Take( size ).ToList();
+            Frames = newFrames;
+            this.HeaderUpdate();
         }
     }
 }

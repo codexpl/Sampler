@@ -7,17 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Content="Load file source" HorizontalAlignment="Left" Margin="40,41,0,0" VerticalAlignment="Top" Width="85" 
-                Command="{Binding LoadSourceCommand}"/>
-        <Button x:Name="ButtonPlaySource" Content="Play" HorizontalAlignment="Left" Margin="140,40,0,0" VerticalAlignment="Top" 
-                IsEnabled="{Binding IsSourceLoaded}"
-                Command="{Binding PlaySourceCommand}"/>
-        
-        <Button Content="Load file destination" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" Width="85" 
-                Command="{Binding LoadDestinationCommand}"/>
-        <Button x:Name="ButtonPlayDestination" Content="Play" HorizontalAlignment="Left" Margin="140,80,0,0" VerticalAlignment="Top" 
+
+        <Button Content="Load sound A" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="85" 
+                Command="{Binding LoadSoundACommand}"/>
+        <Button x:Name="ButtonPlayDestination" Content="Play" HorizontalAlignment="Left" Margin="140,40,0,0" VerticalAlignment="Top" 
                 IsEnabled="{Binding IsDestinationLoaded}"
                 Command="{Binding PlayDestinationCommand}"/>
+
+
+        <Button Content="Load soubd B" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" Width="85" 
+                Command="{Binding LoadSoundBCommand}"/>
+        <Button x:Name="ButtonPlaySource" Content="Play" HorizontalAlignment="Left" Margin="140,80,0,0" VerticalAlignment="Top" 
+                IsEnabled="{Binding IsSourceLoaded}"
+                Command="{Binding PlaySourceCommand}"/>
 
         <Button Content="Mix" HorizontalAlignment="Left" Margin="40,120,0,0" VerticalAlignment="Top" Width="85" 
                 Command="{Binding MixCommand}"/>

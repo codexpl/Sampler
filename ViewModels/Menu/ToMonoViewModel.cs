@@ -22,7 +22,7 @@ namespace Sampler.ViewModels
 
         private void ToMono()
         {
-            //int result = _viewModel.SampleR.RegisterA.ToMono();
+            //int result = _viewModel.Corx.RegisterA.ToMono();
             _viewModel.LogService.Append($"[INFO]  Converting to Mono... samples");
         }
     }

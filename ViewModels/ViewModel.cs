@@ -23,8 +23,8 @@ namespace Sampler.ViewModels {
         public ICommand RewindCommand           { get; }
         public ICommand ForwardCommand          { get; }
 
-        public      LogService                      LogService         { get; private set; }
-        public      Services.Audio.Core          SampleR            { get; set; } = new Services.Audio.Core();
+        public      LogService                      LogService          { get; private set; }
+        public      Services.Audio.Core             Corx                { get; set; } = new Services.Audio.Core();
 
 
 
@@ -50,7 +50,7 @@ namespace Sampler.ViewModels {
 
 
             this.LogService         = logService;
-            this.SampleR            = new Services.Audio.Core();
+            this.Corx            = new Services.Audio.Core();
             this.Menu               = new MenuViewModel( (ViewModel) this );
 
             PlayCommand             = new RelayCommand(Play);
@@ -60,13 +60,13 @@ namespace Sampler.ViewModels {
             this.CurrentMenu        = this.Menu;
             ShowEditorCommand       = new RelayCommand  ( ()    => CurrentMenu = this.Menu );
 
-            LogService.Append("[ERROR] ViewModel initialized.  SampleR.StatusMessage = " + SampleR.StatusMessage );
+            LogService.Append("[ERROR] ViewModel initialized.  Corx.StatusMessage = " + Corx.StatusMessage );
         }
 
-        private void Play() => SampleR.RegisterA.Play();
+        private void Play() => Corx.RegisterA.Play();
         private void Stop() {
-            SampleR.RegisterB.Stop();
-            SampleR.RegisterA.Stop();
+            Corx.RegisterB.Stop();
+            Corx.RegisterA.Stop();
         }
 
     }
