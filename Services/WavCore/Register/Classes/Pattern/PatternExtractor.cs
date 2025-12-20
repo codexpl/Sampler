@@ -35,7 +35,11 @@ namespace Sampler.Services.Audio
         public static float[] FramesToFloat(List<Frame24> frames)   {
             float max = Frame24.MAX_VALUE; // Twój 24-bit max
             float[] arr = new float[frames.Count];
-            for (int i = 0; i < frames.Count; i++)     arr[i] = frames[i].Lvalue() / max;
+            int  average    =   0;
+            for (int i = 0; i < frames.Count; i++)     {
+                    average = (frames[i].Lvalue() + frames[i].Rvalue())/ 2;
+                    arr[i] = average / max;
+            }
             return arr;
         }
 
@@ -74,5 +78,19 @@ namespace Sampler.Services.Audio
             for (int i = 0; i < grad.Length; i++)  grad[i] = data[i + 1] - data[i];
             return grad;
         }
+
+        // FUNKCJE ODWROTNE  NA BAZIE TYCH CO POWYŻEJ LUB ICH WYNIKÓW 
+        public static List<Frame24> FloatToFrames(float[] data)   {
+            float max = Frame24.MAX_VALUE;
+            var frames = new List<Frame24>(data.Length);
+
+            for (int i = 0; i < data.Length; i++)    {
+                int sample = (int)(data[i] * max);
+                frames.Add(new Frame24(sample, sample)); // stereo L=R
+            }
+            return frames;
+        }
+
+
     }
 }

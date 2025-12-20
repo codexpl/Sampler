@@ -10,9 +10,89 @@
 
         <Button Content="Load sound A" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="85" 
                 Command="{Binding LoadSoundACommand}"/>
-        <Button x:Name="ButtonPlayDestination" Content="Play" HorizontalAlignment="Left" Margin="140,40,0,0" VerticalAlignment="Top" 
-                IsEnabled="{Binding IsDestinationLoaded}"
-                Command="{Binding PlayDestinationCommand}"/>
+                <Button x:Name="ButtonPlayDestination" Content="Play" HorizontalAlignment="Left" Margin="140,40,0,0" VerticalAlignment="Top" 
+                        IsEnabled="{Binding IsDestinationLoaded}"
+                        Command="{Binding PlayDestinationCommand}"/>
+
+                              <Grid Width="100" Height="120"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Margin="240,40,0,0"
+                                      MouseDown="Knob_MouseDown"
+                                      MouseMove="Knob_MouseMove"
+                                      MouseUp="Knob_MouseUp"
+                                      IsEnabled="{Binding IsDestinationLoaded}">
+
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Effect">
+                                                <Setter.Value>
+                                                    <DropShadowEffect Color="#00000000"
+                                                              BlurRadius="0"
+                                                              ShadowDepth="0"
+                                                              Opacity="0"/>
+                                                </Setter.Value>
+                                            </Setter>
+
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect Color="#55A0E0FF"
+                                                                      BlurRadius="25"
+                                                                      ShadowDepth="0"
+                                                                      Opacity="1"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+
+
+            <!-- Glow -->
+                                        <Ellipse Width="80" Height="80" 
+                                         Fill="#222"
+                                         StrokeThickness="0">
+                                            <Ellipse.Effect>
+                                                <DropShadowEffect Color="#44A0E0FF"
+                                                          BlurRadius="20"
+                                                          ShadowDepth="0"
+                                                          Opacity="0.8"/>
+                                            </Ellipse.Effect>
+                                        </Ellipse>
+
+                                        <!-- Knob body -->
+                                        <Ellipse Width="80" Height="80"
+                                         Fill="#333"
+                                         Stroke="#777"
+                                         StrokeThickness="3"/>
+
+                                        <!-- Pointer -->
+                                        <Rectangle x:Name="Pointer" Width="4" Height="28" Fill="#EEE"
+                                           RadiusX="2" RadiusY="2"
+                                           VerticalAlignment="Top"
+                                           Margin="0,12,0,0">
+                                            <Rectangle.RenderTransform>
+                                                <RotateTransform x:Name="PointerRotate"
+                                                         CenterX="2"
+                                                         CenterY="28"/>
+                                            </Rectangle.RenderTransform>
+                                        </Rectangle>
+
+                                        <!-- Value text -->
+                                        <TextBlock x:Name="ValueText"
+                                           Text="0.50"
+                                           Foreground="#DDD"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,0,0,4"/>
+
+                                </Grid>
+
+
 
 
         <Button Content="Load soubd B" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" Width="85" 
@@ -27,24 +107,24 @@
                 Command="{Binding PlayMixCommand}"/>
 
 
-        <Button Content="Play"
-        Margin="40,160,0,0" 
-        VerticalAlignment="Top" 
-        Width="85"
-        Command="{Binding PlaySourceCommand}">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Background" Value="LightGray"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="DarkGray"/>
-                            <Setter Property="Background" Value="Gainsboro"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+            <Button Content="Play"
+            Margin="40,160,0,0" 
+            VerticalAlignment="Top" 
+            Width="85"
+            Command="{Binding PlaySourceCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Background" Value="LightGray"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="DarkGray"/>
+                                <Setter Property="Background" Value="Gainsboro"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
 
     </Grid>

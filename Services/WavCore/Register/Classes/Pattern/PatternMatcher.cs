@@ -9,17 +9,10 @@ using System.Threading.Tasks;
 namespace Sampler.Services.Audio
 {
 
-    public struct PatternMatchResult {
-        public int StartFrame { get; }
-        public float Score { get; }
-        public PatternMatchResult(int startFrame, float score)   {
-            StartFrame = startFrame;
-            Score = score;
-        }
-    }
 
 
-  public static class PatternMatcher    {
+
+        public static class PatternMatcher    {
                 private const int TARGET_POINTS = 128;
 
                 /// <summary>
@@ -44,10 +37,10 @@ namespace Sampler.Services.Audio
                 }
 
 
-        /// <summary>
-        /// Wyszukuje wzorzec w rejestrze.
-        /// </summary>
-        public static List<PatternMatchResult> FindMatches( Register register, Pattern pattern, int windowFrames, float minScore = 0.8f, int stepFrames = 1) {
+                /// <summary>
+                /// Wyszukuje wzorzec w rejestrze.
+                /// </summary>
+                public static List<PatternMatchResult> FindMatches( Register register, Pattern pattern, int windowFrames, float minScore = 0.8f, int stepFrames = 1) {
             var results = new List<PatternMatchResult>();
 
             if (windowFrames <= 0 || register.Frames.Count < windowFrames)  return results;
@@ -75,14 +68,25 @@ namespace Sampler.Services.Audio
         }
 
 
-    }
+        }
 
 
-               public static class RegisterPatternExtensions {
-                   public static List<PatternMatchResult> FindPattern ( this Register register, Pattern pattern, int windowFrames, float minScore = 0.8f, int stepFrames = 1) {
+        public static class RegisterPatternExtensions {
+                public static List<PatternMatchResult> FindPattern ( this Register register, Pattern pattern, int windowFrames, float minScore = 0.8f, int stepFrames = 1) {
                         return PatternMatcher.FindMatches(register, pattern, windowFrames, minScore, stepFrames);
                     }
+        }
+
+        public static class RegisterEditExtensions {
+            public static void ReplaceFrames( this Register register, int startFrame, List<Frame24> newFrames ) {
+                for (int i = 0; i < newFrames.Count; i++)  {
+                    int idx = startFrame + i;
+                    if (idx >= register.Frames.Count) break;
+                    register.Frames[idx] = newFrames[i];
                 }
+            }
+        }
+
 
 
 }

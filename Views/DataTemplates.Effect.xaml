@@ -5,24 +5,24 @@
                     xmlns:vmenu="clr-namespace:Sampler.ViewModels.Menu">
 
 
-    <DataTemplate DataType="{x:Type vm:GainViewModel}">
-        <views:GainView/>
-    </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:GainViewModel}">
+            <views:GainView/>
+        </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:SineWaveGeneratorViewModel}">
-        <views:SineWaveGeneratorView/>
-    </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SineWaveGeneratorViewModel}">
+            <views:SineWaveGeneratorView/>
+        </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:FadeViewModel}">
-        <views:FadeView/>
-    </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:FadeViewModel}">
+            <views:FadeView/>
+        </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ToMonoViewModel}">
-        <views:ToMonoView/>
-    </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ToMonoViewModel}">
+            <views:ToMonoView/>
+        </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:MixViewModel}">
-        <views:MixView/>
-    </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MixViewModel}">
+            <views:MixView/>
+        </DataTemplate>
 
 </ResourceDictionary>

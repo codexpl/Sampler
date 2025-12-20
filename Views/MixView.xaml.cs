@@ -22,11 +22,55 @@ namespace Sampler.Views
     /// </summary>
     public partial class MixView : UserControl
     {
-        public MixView()
-        {
-            InitializeComponent();
-            //DataContext = new MixViewModel(App.ViewModel);
+                private bool _dragging = false;
+                private Point _lastPos;
+                public double Value { get; set; } = 0.5; // 0..1
+                public double KnobValue { get; set; } = 0.5; // 0..1
 
-        }
+
+
+
+
+                public MixView()
+                {
+                    InitializeComponent();
+                    //DataContext = new MixViewModel(App.ViewModel);
+                }
+
+
+private void Knob_MouseDown(object sender, MouseButtonEventArgs e)
+{
+    _dragging = true;
+    _lastPos = e.GetPosition(this);
+    Mouse.Capture((UIElement)sender);
+}
+
+private void Knob_MouseUp(object sender, MouseButtonEventArgs e)
+{
+    _dragging = false;
+    Mouse.Capture(null);
+}
+
+private void Knob_MouseMove(object sender, MouseEventArgs e)
+{
+    if (!_dragging) return;
+
+    var pos = e.GetPosition(this);
+    double delta = (_lastPos.Y - pos.Y) * 0.005; // czułość
+    _lastPos = pos;
+
+    KnobValue = Math.Clamp(KnobValue + delta, 0, 1);
+
+    // mapowanie 0..1 → -135..135 stopni
+    double angle = -135 + KnobValue * 270;
+    PointerRotate.Angle = angle;
+
+    // aktualizacja tekstu
+    ValueText.Text = KnobValue.ToString("0.00");
+}
+
+
+
+
     }
 }
