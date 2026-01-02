@@ -15,9 +15,9 @@ namespace Sampler.Services.Audio {
 
         
 
-                
-                public WaveHeader       Header   { get; set; } = new WaveHeader();
-                public List<Frame24>    Frames   { get; set; } = new List<Frame24>();
+                public bool             IsLoaded()              => Frames.Count > 0 && Header.IsValid();
+                public WaveHeader       Header   { get; set; }  = new WaveHeader();
+                public List<Frame24>    Frames   { get; set; }  = new List<Frame24>();
 
 
                 public Register() =>    SetSilence( WaveHeader.SAMPLE_RATE_DEFAULT );
@@ -35,7 +35,7 @@ namespace Sampler.Services.Audio {
 
 
                 // wykonać po każdej zmianie Frames / przed każdym eksportem
-                private void            HeaderUpdate() {
+                public void             HeaderUpdate() {
                             Header.Subchunk2Size = Frames.Count * Header.BlockAlign;
                             Header.ChunkSize = 36 + Header.Subchunk2Size;
                         }

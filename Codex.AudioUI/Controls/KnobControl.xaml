@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Sampler.Codex.AudioUI.Controls.KnobControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="Root"
+             Width="80" Height="80"
+             MouseDown="Root_MouseDown"
+             MouseUp="Root_MouseUp"
+             MouseMove="Root_MouseMove">
+
+    <Grid>
+        <!-- Tło knoba -->
+        <Ellipse Width="60" Height="60"
+                 Fill="#222"
+                 Stroke="#555"
+                 StrokeThickness="2" />
+
+        <!-- Wskazówka -->
+        <Rectangle Width="4" Height="20"
+                   Fill="#DDD"
+                   RadiusX="2" RadiusY="2"
+                   RenderTransformOrigin="0.5,1">
+            <Rectangle.RenderTransform>
+                <RotateTransform
+                    Angle="{Binding Value,
+                                    ElementName=Root,
+                                    Converter={StaticResource KnobToAngleConverter}}" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <!-- Wartość (na razie 0..1, potem zamienimy na Frame, ms itd.) -->
+        <TextBlock Text="{Binding DisplayValue, ElementName=Root}"
+                   Foreground="#DDD"
+                   FontSize="12"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,4" />
+
+        <!-- Etykieta pod gałką -->
+        <TextBlock Text="{Binding Label, ElementName=Root}"
+                   Foreground="#888"
+                   FontSize="11"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,4,0,0" />
+    </Grid>
+</UserControl>

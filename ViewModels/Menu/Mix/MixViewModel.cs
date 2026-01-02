@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace Sampler.ViewModels
 {
-    public class MixViewModel:BaseViewModel
+    public partial class MixViewModel:BaseViewModel
     {
 
         private readonly            ViewModel                           _viewModel;
@@ -30,8 +30,10 @@ namespace Sampler.ViewModels
 
 
         public ICommand MixCommand { get; }
-        public ICommand PlayMixCommand { get; } 
+        public ICommand PlayMixCommand { get; }
         #endregion
+
+
 
 
         #region IsSourceLoaded   
@@ -76,19 +78,21 @@ namespace Sampler.ViewModels
 
 
 
-        private void Mix()  {
+        private void    Mix()  {
             
-            var slice = _viewModel.Corx.RegisterA.Frames.Skip( 10000 ).Take( 500 ).ToList();
-            Pattern kick = PatternExtractor.FromFrames( slice, _viewModel.Corx.RegisterA.Header.SampleRate, "kick" );
-            var hits =_viewModel.Corx.RegisterB.FindPattern( kick, kick.OriginalLength, 0.2f );
+            var slice = _viewModel.Corx.RegisterA.Frames.Skip( (int) KnobOffset * _viewModel.Corx.RegisterA.LengthInFrames() ).Take( 500 ).ToList();
+            _viewModel.Corx.RegisterA.Frames = slice;
+            _viewModel.Corx.RegisterA.HeaderUpdate();
+            //Pattern kick = PatternExtractor.FromFrames( slice, _viewModel.Corx.RegisterA.Header.SampleRate, "kick" );
+            //var hits =_viewModel.Corx.RegisterA.FindPattern( kick, kick.OriginalLength, 0.2f );
 
-            _viewModel.LogService.Append( "[INFO] wzorzec znaleziono  " + hits.Count + " razy w rejestrze B" );
+            //_viewModel.LogService.Append( "[INFO] wzorzec znaleziono  " + hits.Count + " razy w rejestrze A" );
 
             // konwersja patternu do ramek
-            var patternFrames = PatternExtractor.FloatToFrames(kick.Normalized);
+            //var patternFrames = PatternExtractor.FloatToFrames(kick.Normalized);
 
             // nadpisanie wszystkich trafień
-            foreach (var hit in hits) { _viewModel.Corx.RegisterB.ReplaceFrames(hit.StartFrame, patternFrames); }
+            //foreach (var hit in hits) { _viewModel.Corx.RegisterA.ReplaceFrames(hit.StartFrame, patternFrames); }
         }
 
         private void    PlaySource()       => _viewModel.Corx.RegisterB.Play();
@@ -96,27 +100,23 @@ namespace Sampler.ViewModels
 
 
         private void    _loadA()  {
-            _viewModel.LogService.Append( "[INFO] Bits Per Sample: IsDestinationLoaded = " + IsDestinationLoaded );
             var openFileDialog = new Microsoft.Win32.OpenFileDialog { Filter = "WAV Files (*.wav)|*.wav|All Files (*.*)|*.*" };
                 if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                    _viewModel.Corx.LoadA( (byte[])File.ReadAllBytes( filePath ) );
+                    _viewModel.Corx.LoadA( File.ReadAllBytes( filePath ) );
                 }           
-                _viewModel.LogService.Append( "[WARNING] Opened file. Buffer.Bytes.Length = " + + _viewModel.Corx.RegisterB.LengthInFrames() + " frames" );
                IsDestinationLoaded = true;
-                _viewModel.LogService.Append( "[INFO] Sample Rate: " + _viewModel.Corx.RegisterB.Header.SampleRate + " Hz" );
-                _viewModel.LogService.Append( "[INFO] Bits Per Sample: IsDestinationLoaded = " + IsDestinationLoaded );
+                _viewModel.LogService.Append( "[INFO] _loadA  " + IsDestinationLoaded );
         }
         private void    _loadB()  {
-            _viewModel.LogService.Append( "[INFO] Bits Per Sample: IsSourceLoaded = " + IsSourceLoaded );
             var openFileDialog = new Microsoft.Win32.OpenFileDialog { Filter = "WAV Files (*.wav)|*.wav|All Files (*.*)|*.*" };
                 if ( Directory.Exists( AppConfiguration.getReadDirectory() ) ) openFileDialog.InitialDirectory = AppConfiguration.getReadDirectory();
                 if (openFileDialog.ShowDialog() == true) {
                     var filePath = openFileDialog.FileName;
-                    _viewModel.Corx.LoadB( (byte[])File.ReadAllBytes( filePath ) );
+                    _viewModel.Corx.LoadB( File.ReadAllBytes( filePath ) );
                 }           
-                _viewModel.LogService.Append( "[ERROR] Opened file. Length = " + _viewModel.Corx.RegisterA.LengthInFrames() + " frames" );
+                 _viewModel.LogService.Append( "[INFO] _loadB  " + IsDestinationLoaded );
                 IsSourceLoaded = true;
         }
 
