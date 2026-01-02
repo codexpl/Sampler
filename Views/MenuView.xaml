@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="Sampler.Views.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Sampler.ViewModels">
+
+    <Grid Background="#222">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Lista efektów -->
+        <ListBox ItemsSource="{Binding AvailableEffects}"
+                 SelectedItem="{Binding SelectedEffect}"
+                 DisplayMemberPath="Name"
+                 Grid.Column="0"
+                 Foreground="White"
+                 Background="#333"
+                 BorderThickness="0"/>
+
+        <!-- Subwidok efektu -->
+        <ContentControl Content="{Binding CurrentEffectViewModel}"
+                        Grid.Column="1"
+                        Background="#111"/>
+    </Grid>
+</UserControl>

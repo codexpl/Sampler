@@ -10,6 +10,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Sampler.ViewModels;
 using Sampler.Helpers;
+using Sampler.Services.Audio;
+using Sampler.Services.AppConfiguration;
 
 namespace Sampler
 {
@@ -18,17 +20,13 @@ namespace Sampler
     /// </summary>
     public partial class MainWindow : Window
     {
-        public    MenuViewModel     menuViewModel  { get; private set; }
-        public    LogService        logService  {get; private set; }
 
+        private  readonly   LogService       _logService;
         public MainWindow()
         {
             InitializeComponent();
-            logService = new LogService( LogBox );
-            DataContext = new MenuViewModel ( logService );
-
+            _logService = new LogService( LogBox );
+            DataContext = new ViewModel ( _logService );
         }
-
-
     }
 }
