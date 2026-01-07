@@ -17,6 +17,12 @@ namespace Sampler.Services.Audio {
                         RChannel.Write( rightValue );
                 }
 
+                public Frame24(Frame24 other)
+                {
+                    LChannel = new Sample24(other.LChannel);
+                    RChannel = new Sample24(other.RChannel);
+                }
+
                 public int      Lvalue()      => LChannel.Read();
                 public int      Rvalue()      => RChannel.Read();
 

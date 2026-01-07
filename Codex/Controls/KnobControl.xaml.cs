@@ -21,13 +21,13 @@ namespace Sampler.Codex.AudioUI.Controls
     public partial class KnobControl : UserControl
     {
 
-            private bool _dragging;
-            private Point _lastPos;
+            private bool        _dragging;
+            private Point       _lastPos;
 
             public KnobControl() { InitializeComponent(); }
 
 
-        #region DP: Value (0..1)
+                #region DP: Value (0..1)
 
                     public double Value
                     {
@@ -43,10 +43,10 @@ namespace Sampler.Codex.AudioUI.Controls
                             new PropertyMetadata(0.0)
                         );
 
-        #endregion
+                #endregion
 
 
-        #region DP: Label
+                #region DP: Label
 
                 public string Label
                 {
@@ -62,10 +62,10 @@ namespace Sampler.Codex.AudioUI.Controls
                         new PropertyMetadata(string.Empty)
                     );
 
-        #endregion
+                #endregion
 
 
-        #region Mouse handling
+                #region Mouse handling
 
                 private void Root_MouseDown(object sender, MouseButtonEventArgs e)   {
                     _dragging = true;

@@ -21,9 +21,7 @@
                    RenderTransformOrigin="0.5,1">
             <Rectangle.RenderTransform>
                 <RotateTransform
-                    Angle="{Binding Value,
-                                    ElementName=Root,
-                                    Converter={StaticResource KnobToAngleConverter}}" />
+                    Angle="{Binding Value,  ElementName=Root, Converter={StaticResource KnobToAngleConverter}}" />
             </Rectangle.RenderTransform>
         </Rectangle>
 

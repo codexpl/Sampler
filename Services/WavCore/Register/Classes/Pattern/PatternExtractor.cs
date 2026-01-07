@@ -32,6 +32,8 @@ namespace Sampler.Services.Audio
             return new Pattern(resampled, gradient, raw.Length, name);
         }
 
+
+
         public static float[] FramesToFloat(List<Frame24> frames)   {
             float max = Frame24.MAX_VALUE; // Twój 24-bit max
             float[] arr = new float[frames.Count];

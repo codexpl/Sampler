@@ -24,7 +24,19 @@ namespace Sampler.Services.Audio {
 
 
                 public Register( byte[] wavFileBytes) { if( !ImportWavFile( wavFileBytes ) )  SetSilence( WaveHeader.SAMPLE_RATE_DEFAULT ) ; }
-                
+
+
+                public Register(Register other)
+                {
+                    Header = new WaveHeader(other.Header);
+
+                    Frames = new List<Frame24>(other.Frames.Count);
+                    foreach (var f in other.Frames)
+                        Frames.Add(new Frame24(f));
+
+                    HeaderUpdate();
+                }
+
 
 
 

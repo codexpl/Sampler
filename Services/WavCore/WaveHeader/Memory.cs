@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Sampler.Services.Audio {
     public partial class WaveHeader {
+        private WaveHeader header;
 
-            public string   ChunkID             { get; set; }   =   string.Empty;
+        public WaveHeader(WaveHeader header)
+        {
+            this.header = header;
+        }
+
+        public string   ChunkID             { get; set; }   =   string.Empty;
             public int      ChunkSize           { get; set; }
             public string   Format              { get; set; }   =   string.Empty;
             public string   Subchunk1ID         { get; set; }   =   string.Empty;
